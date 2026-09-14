@@ -14,7 +14,7 @@ def main():
     opener=urllib.request.build_opener(NoRedirect)
     request=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['ACTIONS_ID_TOKEN_REQUEST_TOKEN']})
     with opener.open(request,timeout=30) as response:token=json.load(response)['value']
-    request=urllib.request.Request(TARGET,data=body,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},method='POST')
+    request=urllib.request.Request(TARGET,data=body,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json','User-Agent':'Web3MarketDataCenter/1.0 (+https://github.com/raymondhuang1994/web3-market-data-center)'},method='POST')
     with opener.open(request,timeout=120) as response:
         result=json.load(response)
         if not result.get('accepted'):raise RuntimeError('Snapshot rejected')

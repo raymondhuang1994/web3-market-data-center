@@ -797,7 +797,11 @@ export default function Dashboard() {
           <div className="heading-tools">
             <span className="soft-button date-label">
               <CalendarDays size={14} />
-              {bundle?.generatedAt.slice(0, 10) || '加载中'}
+              {bundle
+                ? new Date(bundle.generatedAt).toLocaleDateString('sv-SE', {
+                    timeZone: 'Asia/Shanghai',
+                  })
+                : '加载中'}
             </span>
             <button
               className="soft-button"

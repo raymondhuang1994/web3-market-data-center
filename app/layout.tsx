@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Web3 市场数据中心',
+  icons: { icon: '/favicon.svg' },
   description: 'CEX、DEX、代币化股票与 Hyperliquid 的市场规模、份额和趋势。',
 };
 

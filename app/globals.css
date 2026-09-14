@@ -959,3 +959,23 @@ svg {
     animation: none !important;
   }
 }
+
+@media (max-width: 800px) {
+  .summary-strip > .soft-button {
+    display: none;
+  }
+  .panel-bottom {
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .source-link {
+    max-width: 62%;
+    overflow-wrap: anywhere;
+  }
+  .panel-bottom > span {
+    white-space: nowrap;
+  }
+  .note-bar:has([data-slot='select-trigger']) {
+    flex-wrap: wrap;
+  }
+}
