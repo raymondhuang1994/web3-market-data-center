@@ -296,6 +296,8 @@ def official_datasets(root, offline):
 
 def symbol_series_dataset(root, latest, offline):
     # Page-supported query parameters, using only returned asset names.
+    attempted = now()
+    request_results = []
     rows, sources, fetch_times, duplicate_symbols, duplicate_records = [], [], [], set(), 0
     selected = sorted(latest.get("rows", []), key=lambda x: x.get("value") or 0, reverse=True)[:5]
     for asset in selected:
@@ -306,6 +308,11 @@ def symbol_series_dataset(root, latest, offline):
         key = "hl_symbol_series_" + hashlib.sha256(str(symbol).encode()).hexdigest()[:12]
         payload, fetched, error = fetch(root, key, ORIGIN + path, offline=offline)
         raw = payload.get("data", []) if isinstance(payload, dict) else []
+        request_error = error or ("No historical rows returned" if not isinstance(raw, list) or not raw else None)
+        request_results.append({"symbol": str(symbol), "url": ORIGIN + path,
+                                "attemptedAt": ATTEMPTS.get(ORIGIN + path, attempted),
+                                "fetchedAt": fetched, "result": "failed" if request_error else "ok",
+                                **({"error": str(request_error)[:500]} if request_error else {})})
         if not isinstance(raw, list):
             continue
         sources.append(ORIGIN + path); fetch_times.append(fetched)
@@ -331,14 +338,18 @@ def symbol_series_dataset(root, latest, offline):
     bounded, truncated = bound_rows(rows)
     dates = sorted({r["date"] for r in bounded})
     asof = dates[-1] if dates else None
+    errors = [r["symbol"] + ": " + r["error"] for r in request_results if r["result"] == "failed"]
     return {"id": "hl_symbol_series", "title": "HIP-3 主要资产日历史",
             "source": {"name": "原站按资产公开缓存", "url": ORIGIN + "/dashboard/hyperliquid", "dataUrls": sources, "licenseStatus": "unverified"},
             "fetchedAt": max(fetch_times) if fetch_times else now(), "asOf": asof,
+            "collection": {"attemptedAt": attempted, "result": "failed" if errors or not bounded else "ok",
+                           **({"error": "; ".join(errors)[:500]} if errors else {})},
             "grain": "day × symbol", "unit": "USD (来源页面口径)", "dimensions": ["date", "entity", "symbol"],
             "measures": ["value", "volume", "oi"], "rows": bounded, "status": "stale" if asof and (dt.datetime.now(UTC).date()-dt.date.fromisoformat(asof)).days>1 else "review",
             "note": LICENSE_NOTE + " 仅采样最新Top5资产的日历史；来源symbol尚未和官方dex:coin完成身份映射，其他资产不伪造历史。" +
                     " 原站WTI/SPX等存在同日多行且无dex维度；保留原volume/oi，重复date×symbol的标准绘图value置null，禁止擅自相加。",
             "coverage": {"rowCount": len(bounded), "from": dates[0] if dates else None, "to": asof,
+                         "requests": request_results, "refreshErrors": errors,
                          "sampleSymbols": [x.get("symbol") for x in selected], "truncated": truncated, "productionEligible": False,
                          "duplicateDateSymbols": sorted(duplicate_symbols), "rawDuplicateRecords": duplicate_records,
                          "chartEligibleSymbols": [x.get("symbol") for x in selected if x.get("symbol") not in duplicate_symbols]}}
