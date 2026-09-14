@@ -1,2 +1,59 @@
-# web3-market-data-center
-面向高管和营销团队的 Web3 市场数据中心：CEX、DEX、代币化股票与 Hyperliquid，每日数据更新。
+# Web3 市场数据中心
+
+面向高管与营销团队的中文市场看板。覆盖 CEX、DEX、代币化股票及 Hyperliquid；以真实来源快照作图，明确区分已接入、源数据延迟、口径待核和待接入。
+
+网站：https://web3-market-center.raymondhuangj.chatgpt.site
+
+源码保存在此私有仓库；网站按用户要求公开。代码与数据的授权分别处理，本项目不为上游数据授予新许可。
+
+## 功能
+
+- 总览与 12 个专题路径，CEX 6 页、DEX 2 页、代币化股票 3 页、Hyperliquid 7 个内部标签。
+- 图表、标的/指标筛选、30/90/180 日及全部已采集时间范围、最新排名、明细搜索/排序/分页。
+- 每图显示来源、数据日期、采集时间与限制；空值不按零绘图，重复维度形成断点。
+- Robinhood Chain 四个标签、热门板块 28 类目录完整保留。
+- CEX 网站流量/期权和 UNI Burn 已按要求排除；DEX 现货与永续市场份额保留待接入。
+- AI 解读保留待接入状态；未购买 AI 服务、数据 API 或安装新数据插件。
+
+## 本地运行
+
+Node.js >=22.13，pnpm 11.19。Python >=3.10 用于采集（无第三方 Python 包）。
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
+pnpm test
+pnpm typecheck
+pnpm build
+```
+
+使用 Sites 的 vinext / React / Recharts / shadcn UI，D1 负责生产快照。`.openai/hosting.json` 只含非敏感逻辑绑定，真实资源由 Sites 配置。
+
+## 每日更新
+
+GitHub Actions `.github/workflows/update-data.yml` 在北京时间 09:17、13:47 各运行一次，也可手动 Run workflow。定时任务可能受 GitHub 调度延迟影响，不等同于秒级 SLA。公开数据源本身可能晚数日，网站保持其真实日期。
+
+1. 两个标准库采集器请求批准来源，不执行付费查询或交易操作。
+2. `collect.py` 输出临时候选快照（不提交 raw 响应，不将受限费用并入候选）。
+3. `publish.py` 获取短期 GitHub OIDC 身份，audience 绑定上传正文 SHA-256，不需要长期共享 secret。
+4. 网站验证仓库/owner ID、分支、工作流、事件、签名、有效期、数据契约和来源白名单。
+5. D1 事务以 compare-and-swap 发布快照，失败保留上一有效版本，单来源失败保留其原日期；保留最近 3 批数据与 7 天收据。
+
+私有 Actions 及 Sites 的可用额度由账户控制；没有购买付费计划。不承诺超出既有免费额度运行。工作流失败在 GitHub Actions 可见，网站仍提供上一有效快照。
+
+## 数据边界
+
+初始 49 个数据集均保留。已取得历史主要为日频最多 180 日，月成交额约 45 月；官方 Hyperliquid 是逐市场采样的当前快照。Stocks 之外 27 类只有已验证目录，未声称全部历史已经接入。
+
+原站聚合资料采用来源署名。原站的 API 可读不代表获得上游供应商再分发授权；明确限制公开使用的 DefiLlama 费用与市场份额未发布数值。各来源条件仍需持续核对，见 [数据审计](docs/DATA_SOURCES.md)。
+
+费率原值暂不作未经核实的百分比换算；不同保证金 OI 不混加。Hyperliquid USDC/USDE/USDH/USDT0 报价币名义值未进行汇率换算。CEX 源样本含部分 DEX，样本合计不代表全球 CEX；股票主题永续不等于可兑付实股的代币。
+
+## 文档与维护
+
+- [PRD](docs/PRD.md) / [SPEC](docs/SPEC.md)
+- [实施说明](docs/IMPLEMENTATION.md)
+- [来源与可获取颗粒度](docs/DATA_SOURCES.md)
+- 数据采集脚本位于 `scripts/`；归一化契约在 `lib/snapshot.ts`。
+- D1 迁移以 Drizzle 生成；已部署迁移不得改写，新增 schema 时追加迁移。
+- 本地 `work/`、原始响应、密钥与依赖目录不进入版本库。
