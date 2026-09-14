@@ -6,8 +6,8 @@ const repo = 'raymondhuang1994/web3-market-data-center';
 const repoId = '1370214885',
   ownerId = '209585471';
 export type Claims = Record<string, unknown>;
-function assert(value: unknown): asserts value {
-  if (!value) throw new Error('Unauthorized');
+function assert(value: unknown, code = 'oidc_rejected'): asserts value {
+  if (!value) throw new Error(code);
 }
 export async function sha256(bytes: Uint8Array) {
   const digest = await crypto.subtle.digest('SHA-256', bytes as BufferSource);
@@ -16,7 +16,7 @@ export async function sha256(bytes: Uint8Array) {
     .join('');
 }
 function decode(value: string) {
-  assert(/^[A-Za-z0-9_-]+$/.test(value));
+  assert(/^[A-Za-z0-9_-]+$/.test(value), 'oidc_check_19');
   return Uint8Array.from(
     atob(value.replace(/-/g, '+').replace(/_/g, '/')),
     (x) => x.charCodeAt(0),
@@ -27,31 +27,40 @@ export function checkClaims(
   hash: string,
   now = Math.floor(Date.now() / 1000),
 ) {
-  assert(c.iss === issuer && c.aud === ingestUrl + '#sha256=' + hash);
+  assert(
+    c.iss === issuer && c.aud === ingestUrl + '#sha256=' + hash,
+    'oidc_check_30',
+  );
   assert(
     c.repository === repo &&
       c.repository_id === repoId &&
       c.repository_owner_id === ownerId &&
       c.repository_owner === 'raymondhuang1994',
+    'oidc_check_31',
   );
   assert(
     c.repository_visibility === 'private' &&
       c.ref === 'refs/heads/main' &&
       c.ref_type === 'branch',
+    'oidc_check_37',
   );
   assert(
     c.workflow_ref ===
       repo + '/.github/workflows/update-data.yml@refs/heads/main',
+    'oidc_check_42',
   );
-  assert(c.event_name === 'schedule' || c.event_name === 'workflow_dispatch');
-  assert(c.runner_environment === 'github-hosted');
+  assert(
+    c.event_name === 'schedule' || c.event_name === 'workflow_dispatch',
+    'oidc_check_46',
+  );
+  assert(c.runner_environment === 'github-hosted', 'oidc_check_47');
   const allowed = [
     `repo:raymondhuang1994@${ownerId}/web3-market-data-center@${repoId}:ref:refs/heads/main`,
     `repo:${repo}:ref:refs/heads/main`,
   ];
-  assert(allowed.includes(String(c.sub)));
+  assert(allowed.includes(String(c.sub)), 'oidc_check_52');
   for (const k of ['iat', 'exp', 'nbf'])
-    assert(typeof c[k] === 'number' && Number.isInteger(c[k]));
+    assert(typeof c[k] === 'number' && Number.isInteger(c[k]), 'oidc_check_54');
   const iat = c.iat as number,
     exp = c.exp as number,
     nbf = c.nbf as number;
@@ -61,10 +70,17 @@ export function checkClaims(
       nbf <= now + 30 &&
       iat >= now - 630 &&
       exp > iat,
+    'oidc_check_58',
   );
-  assert(typeof c.jti === 'string' && c.jti.length > 0 && c.jti.length < 256);
+  assert(
+    typeof c.jti === 'string' && c.jti.length > 0 && c.jti.length < 256,
+    'oidc_check_65',
+  );
   for (const k of ['run_id', 'run_attempt', 'run_number'])
-    assert(typeof c[k] === 'string' && /^\d+$/.test(c[k] as string));
+    assert(
+      typeof c[k] === 'string' && /^\d+$/.test(c[k] as string),
+      'oidc_check_67',
+    );
   return c;
 }
 let cache: { keys: JsonWebKey[]; until: number } | null = null;
@@ -75,20 +91,23 @@ async function trustedKeys(refresh = false): Promise<JsonWebKey[]> {
   if (cache && now < cache.until && !refresh) return cache.keys;
   if (fetching) return fetching;
   if (now - lastFetch < 30000) {
-    assert(cache && now < cache.until);
+    assert(cache && now < cache.until, 'oidc_check_78');
     return cache.keys;
   }
   lastFetch = now;
   fetching = (async () => {
     const r = await fetch(jwksUrl, {
       signal: AbortSignal.timeout(10000),
-      redirect: 'error',
+      redirect: 'manual',
     });
-    assert(r.ok);
+    assert(r.ok, 'oidc_check_87');
     const text = await r.text();
-    assert(text.length < 100000);
+    assert(text.length < 100000, 'oidc_check_89');
     const parsed = JSON.parse(text);
-    assert(Array.isArray(parsed.keys) && parsed.keys.length < 30);
+    assert(
+      Array.isArray(parsed.keys) && parsed.keys.length < 30,
+      'oidc_check_91',
+    );
     cache = { keys: parsed.keys, until: now + 3600000 };
     return cache.keys;
   })();
@@ -104,18 +123,22 @@ export async function verifySignedToken(
   hash: string,
   now?: number,
 ) {
-  assert(token.length <= 16384);
+  assert(token.length <= 16384, 'oidc_check_107');
   const parts = token.split('.');
-  assert(parts.length === 3);
+  assert(parts.length === 3, 'oidc_check_109');
   const header = JSON.parse(new TextDecoder().decode(decode(parts[0])));
-  assert(header && typeof header === 'object' && !Array.isArray(header));
+  assert(
+    header && typeof header === 'object' && !Array.isArray(header),
+    'oidc_check_111',
+  );
   assert(
     header.alg === 'RS256' &&
       typeof header.kid === 'string' &&
       header.kid.length < 200,
+    'oidc_check_112',
   );
   for (const key of ['jku', 'x5u', 'jwk', 'crit', 'b64'])
-    assert(!(key in header));
+    assert(!(key in header), 'oidc_check_118');
   const jwk = keys.find(
     (k) => (k as JsonWebKey & { kid: string }).kid === header.kid,
   );
@@ -124,6 +147,7 @@ export async function verifySignedToken(
       (!jwk.alg || jwk.alg === 'RS256') &&
       (!jwk.use || jwk.use === 'sig') &&
       (!jwk.key_ops || jwk.key_ops.includes('verify')),
+    'oidc_check_122',
   );
   const key = await crypto.subtle.importKey(
     'jwk',
@@ -139,9 +163,13 @@ export async function verifySignedToken(
       decode(parts[2]) as BufferSource,
       new TextEncoder().encode(parts[0] + '.' + parts[1]),
     ),
+    'oidc_check_135',
   );
   const claims = JSON.parse(new TextDecoder().decode(decode(parts[1])));
-  assert(claims && typeof claims === 'object' && !Array.isArray(claims));
+  assert(
+    claims && typeof claims === 'object' && !Array.isArray(claims),
+    'oidc_check_144',
+  );
   return checkClaims(claims, hash, now);
 }
 export async function verifyGitHub(token: string, hash: string) {
@@ -155,14 +183,14 @@ export async function verifyGitHub(token: string, hash: string) {
 }
 
 export async function verifyIdentity(token: string) {
-  assert(token.length <= 16384);
+  assert(token.length <= 16384, 'oidc_check_158');
   const parts = token.split('.');
-  assert(parts.length === 3);
+  assert(parts.length === 3, 'oidc_check_160');
   const decoded = JSON.parse(new TextDecoder().decode(decode(parts[1])));
-  assert(typeof decoded.aud === 'string');
+  assert(typeof decoded.aud === 'string', 'oidc_check_162');
   const prefix = ingestUrl + '#sha256=';
-  assert(decoded.aud.startsWith(prefix));
+  assert(decoded.aud.startsWith(prefix), 'oidc_check_164');
   const hash = decoded.aud.slice(prefix.length);
-  assert(/^[a-f0-9]{64}$/.test(hash));
+  assert(/^[a-f0-9]{64}$/.test(hash), 'oidc_check_166');
   return verifyGitHub(token, hash);
 }

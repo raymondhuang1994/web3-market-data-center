@@ -14,7 +14,15 @@ export async function POST(request: Request) {
   let claims;
   try {
     claims = await verifyIdentity(authorization.slice(7));
-  } catch {
+  } catch (error) {
+    console.warn(
+      'OIDC rejected',
+      error instanceof Error && error.message.startsWith('oidc_check_')
+        ? error.message
+        : error instanceof Error
+          ? error.name
+          : 'unknown',
+    );
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
   let bytes: Uint8Array;
