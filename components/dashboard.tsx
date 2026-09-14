@@ -61,6 +61,19 @@ import {
   series,
   statusText,
 } from '@/lib/data';
+import {
+  unitLabel,
+  batchHealth,
+  collectionState,
+  columnUnit,
+  dependencyIds,
+  displayStatus,
+  freshness,
+  projectedRows,
+  sourcePolicy,
+  sourceTime,
+} from '@/lib/quality';
+import { ReportActions } from '@/components/report-actions';
 import { groups, pages, PanelDef } from '@/lib/catalog';
 const github = 'https://github.com/raymondhuang1994/web3-market-data-center';
 function Pick({
@@ -283,7 +296,11 @@ function Rankings({
     </div>
   );
 }
-function DataTable({ dataset }: { dataset: Dataset }) {
+function DataTable({ dataset: input }: { dataset: Dataset }) {
+  const dataset = useMemo(
+    () => ({ ...input, rows: projectedRows(input) }),
+    [input],
+  );
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(0);
   const [sort, setSort] = useState({
@@ -380,7 +397,11 @@ function DataTable({ dataset }: { dataset: Dataset }) {
                     setPage(0);
                   }}
                 >
-                  {label(k)} {sort.key === k ? (sort.desc ? '↓' : '↑') : ''}
+                  {label(k)}
+                  {columnUnit(dataset, k)
+                    ? ` (${columnUnit(dataset, k)})`
+                    : ''}{' '}
+                  {sort.key === k ? (sort.desc ? '↓' : '↑') : ''}
                 </button>
               </TableHead>
             ))}
@@ -423,7 +444,7 @@ function DataTable({ dataset }: { dataset: Dataset }) {
     </>
   );
 }
-function Panel({
+export function Panel({
   def,
   dataset,
   compact = false,
@@ -467,12 +488,12 @@ function Panel({
           <h2 className="panel-title">{def.title}</h2>
           <div className="panel-subtitle">
             {def.subtitle ||
-              `${dataset.unit || '数据源待接入'}${dataset.grain ? ' · ' + dataset.grain : ''}`}
+              `${unitLabel(dataset.unit) || '数据源待接入'}${dataset.grain ? ' · ' + dataset.grain : ''}`}
           </div>
         </div>
         <div className="panel-header-right">
-          <span className={`status-badge ${dataset.status}`}>
-            {statusText(dataset)}
+          <span className={`status-badge ${displayStatus(dataset)}`}>
+            {statusText({ ...dataset, status: displayStatus(dataset) })}
           </span>
         </div>
       </div>
@@ -568,11 +589,11 @@ function Panel({
               </div>
             </div>
           )}
-          {dataset.status === 'review' && (
+          {sourcePolicy(dataset).definitionReview && (
             <div className="note-bar">
               <Info size={14} />
               <span>
-                口径待核：保留来源数值，单位为「{dataset.unit}
+                口径待核：保留来源数值，单位为「{unitLabel(dataset.unit)}
                 」，不作未经验证的换算。
               </span>
             </div>
@@ -611,6 +632,16 @@ function Panel({
       {!compact && (
         <details className="source-details">
           <summary>数据口径与覆盖范围</summary>
+          <p>
+            {sourcePolicy(dataset).reliability} ·{' '}
+            {sourcePolicy(dataset).useStatus}
+          </p>
+          <p>
+            计划采集：每日北京时间 09:17、13:47。
+            <a href={`/sources#${dependencyIds(dataset.id)[0]}`}>
+              查看逐项核验 ↗
+            </a>
+          </p>
           <p>{def.note || dataset.note || '以来源公布口径为准。'}</p>
           <p>
             最近采集：
@@ -620,14 +651,15 @@ function Panel({
                   hour12: false,
                 })
               : '尚未接入'}
-            （北京时间）。采集时间与数据日期分别记录。
+            （北京时间）。{collectionState(dataset)}；{freshness(dataset).text}
+            。
           </p>
         </details>
       )}
     </section>
   );
 }
-function Kpi({
+export function Kpi({
   dataset,
   title,
   metric = 'ALL',
@@ -640,8 +672,11 @@ function Kpi({
   href: string;
   icon?: typeof Activity;
 }) {
-  const value = latestValue(dataset, metric);
-  const rows = dataset.rows;
+  const today = new Date().toISOString().slice(0, 10);
+  const rows = dataset.rows.filter(
+    (r) => typeof r.date === 'string' && r.date < today,
+  );
+  const value = latestValue({ ...dataset, rows }, metric);
   const last = rows.at(-1),
     prev = rows.at(-2);
   const a = last?.[metric] ?? last?.value,
@@ -654,6 +689,9 @@ function Kpi({
         {title}
         <Icon size={17} />
       </div>
+      <span className={`status-badge ${displayStatus(dataset)}`}>
+        {statusText({ ...dataset, status: displayStatus(dataset) })}
+      </span>
       <div className="kpi-value num">{format(value, dataset.unit)}</div>
       <div className="kpi-meta">
         {pct !== null && (
@@ -662,8 +700,8 @@ function Kpi({
           </span>
         )}
         <span>
-          {pct !== null ? '较前一数据日 · ' : ''}
-          {dataset.asOf?.slice(5, 10) || '待接入'}
+          {pct !== null ? '最近两条已结束日期比较 · ' : ''}
+          {String(last?.date || dataset.asOf || '').slice(5, 10) || '待接入'}
         </span>
       </div>
     </a>
@@ -678,12 +716,30 @@ export default function Dashboard() {
   const [error, setError] = useState('');
   const [tab, setTab] = useState(0);
   const [sector, setSector] = useState('Stocks');
-  const [showSources, setShowSources] = useState(false);
+  const [showSources] = useState(false);
+  const ids = page
+    ? Array.from(
+        new Set(
+          page.views
+            .flatMap((v) => v.panels.flatMap((p) => dependencyIds(p.id)))
+            .concat(page.group === 'stocks' ? ['tradfi_labels'] : []),
+        ),
+      )
+    : [
+        'cex_spot_daily',
+        'cex_futures_daily',
+        'futures_oi_btc',
+        'stablecoin_marketcap',
+        'tradfi_stocks',
+        'hl_hip3_and_crypto',
+        'dex_spot_market_share',
+      ];
+  const dataUrl = '/api/data?ids=' + ids.join(',');
   async function refresh() {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch('/api/data', { cache: 'no-store' });
+      const response = await fetch(dataUrl, { cache: 'no-store' });
       if (!response.ok) throw Error('refresh');
       setBundle(await response.json());
     } catch {
@@ -694,7 +750,7 @@ export default function Dashboard() {
   }
   useEffect(() => {
     const controller = new AbortController();
-    void fetch('/api/data', { signal: controller.signal })
+    void fetch(dataUrl, { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw Error('load');
         return r.json();
@@ -710,7 +766,7 @@ export default function Dashboard() {
         }
       });
     return () => controller.abort();
-  }, []);
+  }, [dataUrl]);
   const get = (id: string) =>
     bundle ? getDataset(bundle, id) : pending(id, id);
   const currentView = page?.views[tab] || page?.views[0];
@@ -730,7 +786,7 @@ export default function Dashboard() {
       const measures = d.measures.filter((k) =>
         tab === 1 ? !k.startsWith('all_') : k.startsWith('all_'),
       );
-      return { ...d, measures };
+      return { ...d, measures, rows: projectedRows({ ...d, measures }) };
     }
     return d;
   };
@@ -755,8 +811,12 @@ export default function Dashboard() {
           ))}
         </nav>
         <div className="header-end">
-          <span className="live-dot" />
-          <span className="last-check">每日更新</span>
+          <span
+            className={`live-dot ${bundle && !batchHealth(bundle).healthy ? 'unhealthy' : ''}`}
+          />
+          <span className="last-check">
+            {bundle ? batchHealth(bundle).text : '检查数据'}
+          </span>
           <span className="lang-tag">中文</span>
         </div>
       </header>
@@ -815,12 +875,19 @@ export default function Dashboard() {
             </button>
           </div>
         </div>
+        {bundle && !batchHealth(bundle).healthy && (
+          <div role="alert" className="note-bar">
+            {batchHealth(bundle).text}。实际数据日期见各图表；最近批次：
+            {sourceTime(bundle.generatedAt)}。
+          </div>
+        )}
         {error && (
           <div role="alert" className="note-bar">
             <Info size={14} />
             {error}
           </div>
         )}
+        <ReportActions />
         <div className="summary-strip">
           <div className="summary-icon">
             <Sparkles size={20} />
@@ -833,13 +900,10 @@ export default function Dashboard() {
               保留每日解读栏目。数据来源和生成方案确认后，将基于可核验指标生成摘要。
             </p>
           </div>
-          <button
-            className="soft-button"
-            onClick={() => setShowSources(!showSources)}
-          >
+          <a className="soft-button" href="/sources">
             查看数据覆盖
             <ChevronRight size={13} />
-          </button>
+          </a>
         </div>
         {!bundle ? (
           <div className="kpi-grid">
@@ -1008,7 +1072,9 @@ export default function Dashboard() {
               <h2 className="panel-title">数据覆盖与更新状态</h2>
               <button
                 className="soft-button"
-                onClick={() => setShowSources(false)}
+                onClick={() => {
+                  window.location.href = '/sources';
+                }}
               >
                 收起
               </button>
@@ -1085,7 +1151,7 @@ export default function Dashboard() {
           <div className="footer-links">
             <button
               onClick={() => {
-                setShowSources(true);
+                window.location.href = '/sources';
                 setTimeout(
                   () =>
                     document

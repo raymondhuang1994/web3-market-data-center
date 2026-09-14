@@ -1,4 +1,6 @@
 import bootstrap from '@/data/bootstrap.json';
+import { archiveBundle } from '@/lib/archive';
+import { readBundle } from '@/lib/bundles';
 import { db } from '@/lib/db';
 import { sha256, verifyIdentity, ingestUrl } from '@/lib/oidc';
 import { keepLastGood, validateBundle } from '@/lib/snapshot';
@@ -76,13 +78,31 @@ export async function POST(request: Request) {
       .prepare('SELECT payload_hash,snapshot_id FROM ingest_tokens WHERE jti=?')
       .bind(claims.jti)
       .first<{ payload_hash: string; snapshot_id: string }>();
-    if (replay)
-      return Response.json(
-        replay.payload_hash === hash
-          ? { accepted: true, snapshotId: replay.snapshot_id, idempotent: true }
-          : { error: 'Replay conflict' },
-        { status: replay.payload_hash === hash ? 200 : 409 },
-      );
+    if (replay) {
+      if (replay.payload_hash !== hash)
+        return Response.json({ error: 'Replay conflict' }, { status: 409 });
+      const accepted = await readBundle(replay.snapshot_id);
+      if (!accepted)
+        return Response.json(
+          { error: 'Accepted snapshot unavailable' },
+          { status: 503 },
+        );
+      let archived = false;
+      try {
+        await archiveBundle(accepted, replay.snapshot_id);
+        archived = true;
+      } catch {
+        console.warn('Snapshot archive retry failed');
+      }
+      return Response.json({
+        accepted: true,
+        snapshotId: replay.snapshot_id,
+        idempotent: true,
+        generatedAt: accepted.generatedAt,
+        datasetCount: accepted.datasets.length,
+        archived,
+      });
+    }
     if (
       previous.results.length &&
       Date.parse(candidate.generatedAt) <=
@@ -151,13 +171,20 @@ export async function POST(request: Request) {
         .bind(id, bundle.generatedAt),
     );
     await database.batch(statements);
+    let archived = false;
+    try {
+      await archiveBundle(bundle, id);
+      archived = true;
+    } catch {
+      console.warn('Snapshot archive failed');
+    }
     try {
       await database.batch([
         database.prepare(
-          'DELETE FROM datasets WHERE snapshot_id NOT IN (SELECT id FROM snapshots ORDER BY generated_at DESC LIMIT 3) AND snapshot_id NOT IN (SELECT snapshot_id FROM current_snapshot)',
+          'DELETE FROM datasets WHERE snapshot_id IN (SELECT snapshot_id FROM snapshot_archives) AND snapshot_id NOT IN (SELECT id FROM snapshots ORDER BY generated_at DESC LIMIT 60) AND snapshot_id NOT IN (SELECT snapshot_id FROM current_snapshot)',
         ),
         database.prepare(
-          'DELETE FROM snapshots WHERE id NOT IN (SELECT id FROM snapshots ORDER BY generated_at DESC LIMIT 3) AND id NOT IN (SELECT snapshot_id FROM current_snapshot)',
+          'DELETE FROM snapshots WHERE id IN (SELECT snapshot_id FROM snapshot_archives) AND id NOT IN (SELECT id FROM snapshots ORDER BY generated_at DESC LIMIT 60) AND id NOT IN (SELECT snapshot_id FROM current_snapshot)',
         ),
         database.prepare(
           "DELETE FROM ingest_tokens WHERE accepted_at < strftime('%Y-%m-%dT%H:%M:%fZ','now','-7 days')",
@@ -168,6 +195,7 @@ export async function POST(request: Request) {
     }
     return Response.json({
       accepted: true,
+      archived,
       snapshotId: id,
       runId: claims.run_id,
       datasetCount: bundle.datasets.length,

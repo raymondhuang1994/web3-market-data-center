@@ -71,9 +71,9 @@ def flat(rows):
 class Collector:
  def __init__(self,out,cache):
   self.out=pathlib.Path(out);self.raw=self.out/'raw';self.raw.mkdir(parents=True,exist_ok=True)
-  self.cache=cache;self.errors={};self.docs={};self.fetched={};self.datasets=[]
+  self.cache=cache;self.errors={};self.docs={};self.fetched={};self.attempted={};self.datasets=[]
  def fetch(self,item):
-  key,path=item; f=self.raw/(key+'.raw')
+  key,path=item; f=self.raw/(key+'.raw');self.attempted[key]=iso(time.time())
   try:
    if not self.cache:
     error=None
@@ -111,8 +111,12 @@ class Collector:
   if coverage:c.update(coverage)
   if grain=='month' and through:
    current=dt.date.fromisoformat(through[:10]);following=dt.date(current.year+1,1,1) if current.month==12 else dt.date(current.year,current.month+1,1)
-   through=(following-dt.timedelta(days=1)).isoformat();c['periodConvention']='rows use month-start; asOf is completed month-end'
-  self.datasets.append({'id':id,'title':title or TITLES.get(id,id),'source':{'name':'吴说数据中心公开数据（原站聚合）','url':BASE+PATHS.get(source,'/dashboard')},'fetchedAt':self.fetched.get(source,iso(NOW.timestamp())),'asOf':through,'grain':grain,'unit':unit,'dimensions':dimensions,'measures':measures,'rows':rows,'status':status,'note':note,'coverage':c})
+   end=following-dt.timedelta(days=1)
+   if following<=NOW.date():
+    through=end.isoformat();c['periodConvention']='rows use month-start; asOf is completed month-end'
+   else:
+    through=NOW.date().isoformat();c['periodConvention']='latest month is partial; do not compare with completed months';c['latestPeriodComplete']=False
+  self.datasets.append({'id':id,'title':title or TITLES.get(id,id),'source':{'name':'吴说数据中心公开数据（原站聚合）','url':BASE+PATHS.get(source,'/dashboard')},'fetchedAt':self.fetched.get(source,iso(NOW.timestamp())),'asOf':through,'grain':grain,'unit':unit,'dimensions':dimensions,'measures':measures,'rows':rows,'status':status,'note':note,'coverage':c,'collection':{'attemptedAt':self.attempted.get(source,iso(time.time())),'result':'not-configured' if id=='cex_reserve_score' else 'ok' if rows and source not in self.errors else 'failed',**({'error':str(self.errors[source])[:500]} if source in self.errors else {})}})
  def points(self,key,rows,unit='USD',status=None,note='',source=None,entity=None,title=None):
   result=[]
   for r in rows:

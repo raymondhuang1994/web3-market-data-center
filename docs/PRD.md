@@ -1,3 +1,5 @@
+> 当前实施补充：用户已批准并实施 v0.2；逐项来源、采集与整站 PDF 方案见 [RELEASE_V2.md](RELEASE_V2.md)。下文保留此前基线与历史调研，最新时效以网站 `/sources` 为准。
+
 > 实施状态：用户已于 2026-09-15 批准执行。实际架构与第一版数据边界见 [IMPLEMENTATION.md](IMPLEMENTATION.md)；以下保留原审批文档作为范围基线。
 
 # Web3 市场数据中心 · PRD

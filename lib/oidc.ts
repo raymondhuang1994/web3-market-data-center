@@ -26,9 +26,10 @@ export function checkClaims(
   c: Claims,
   hash: string,
   now = Math.floor(Date.now() / 1000),
+  audienceBase = ingestUrl,
 ) {
   assert(
-    c.iss === issuer && c.aud === ingestUrl + '#sha256=' + hash,
+    c.iss === issuer && c.aud === audienceBase + '#sha256=' + hash,
     'oidc_check_30',
   );
   assert(
@@ -122,6 +123,7 @@ export async function verifySignedToken(
   keys: JsonWebKey[],
   hash: string,
   now?: number,
+  audienceBase = ingestUrl,
 ) {
   assert(token.length <= 16384, 'oidc_check_107');
   const parts = token.split('.');
@@ -170,27 +172,31 @@ export async function verifySignedToken(
     claims && typeof claims === 'object' && !Array.isArray(claims),
     'oidc_check_144',
   );
-  return checkClaims(claims, hash, now);
+  return checkClaims(claims, hash, now, audienceBase);
 }
-export async function verifyGitHub(token: string, hash: string) {
+export async function verifyGitHub(
+  token: string,
+  hash: string,
+  audienceBase = ingestUrl,
+) {
   let keys = await trustedKeys();
   try {
-    return await verifySignedToken(token, keys, hash);
+    return await verifySignedToken(token, keys, hash, undefined, audienceBase);
   } catch {
     keys = await trustedKeys(true);
-    return verifySignedToken(token, keys, hash);
+    return verifySignedToken(token, keys, hash, undefined, audienceBase);
   }
 }
 
-export async function verifyIdentity(token: string) {
+export async function verifyIdentity(token: string, audienceBase = ingestUrl) {
   assert(token.length <= 16384, 'oidc_check_158');
   const parts = token.split('.');
   assert(parts.length === 3, 'oidc_check_160');
   const decoded = JSON.parse(new TextDecoder().decode(decode(parts[1])));
   assert(typeof decoded.aud === 'string', 'oidc_check_162');
-  const prefix = ingestUrl + '#sha256=';
+  const prefix = audienceBase + '#sha256=';
   assert(decoded.aud.startsWith(prefix), 'oidc_check_164');
   const hash = decoded.aud.slice(prefix.length);
   assert(/^[a-f0-9]{64}$/.test(hash), 'oidc_check_166');
-  return verifyGitHub(token, hash);
+  return verifyGitHub(token, hash, audienceBase);
 }

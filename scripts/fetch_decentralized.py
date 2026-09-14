@@ -20,6 +20,7 @@ import time
 import urllib.parse
 import urllib.request
 
+ATTEMPTS = {}
 UTC = dt.timezone.utc
 ORIGIN = "https://data.wublock123.com"
 HL = "https://api.hyperliquid.xyz/info"
@@ -82,6 +83,7 @@ def number(value):
 
 
 def fetch(root, key, url, body=None, offline=False, restricted=False):
+    ATTEMPTS[url] = now()
     file = root / ("restricted" if restricted else "raw") / (key + ".json")
     meta_file = file.with_suffix(".meta.json")
     error = None
@@ -354,6 +356,7 @@ def main():
         restricted = spec[0] == "hl_fees_daily"
         payload, fetched, error = fetch(args.out, spec[0], ORIGIN + spec[2], offline=args.offline or (restricted and not args.include_restricted), restricted=restricted)
         result = origin_dataset(spec, payload, fetched, error)
+        result["collection"]={"attemptedAt":ATTEMPTS.get(ORIGIN+spec[2],now()),"result":"not-configured" if restricted else "failed" if error or not result["rows"] else "ok",**({"error":str(error)[:500]} if error and not restricted else {})}
         print(spec[0], result["status"], len(result["rows"]), result["asOf"], flush=True)
         return result
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
@@ -369,6 +372,11 @@ def main():
         placeholder("dex_perp_market_share", "DEX 永续市场份额", "https://api-docs.defillama.com/llms.txt",
                     "官方文档将derivatives成交量API列为Pro-only；没有注册密钥或付费。免费OI不等于成交量，不替换指标。", source_name="DefiLlama Pro（未接入）"),
     ])
+    for d in datasets:
+        if "collection" not in d:
+            c=d.get("coverage",{}); errors=c.get("refreshErrors") or c.get("failedDexs") or c.get("refreshError")
+            disabled=d["id"] in ["dex_spot_market_share","dex_perp_market_share"]
+            d["collection"]={"attemptedAt":ATTEMPTS.get(d["source"]["url"],now()),"result":"not-configured" if disabled else "failed" if errors or not d["rows"] else "ok",**({"error":str(errors)[:500]} if errors else {})}
     document = {"generatedAt": now(), "purpose": "research data assets for integration review; not proof of publication licence", "datasets": datasets}
     write_json(args.out / "datasets.json", document)
     print("Wrote", args.out / "datasets.json", "datasets", len(datasets), flush=True)

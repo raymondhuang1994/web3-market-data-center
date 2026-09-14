@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Publish with a GitHub OIDC token bound to the exact JSON bytes."""
-import base64,hashlib,json,os,pathlib,urllib.parse,urllib.request,urllib.error
+import base64,hashlib,json,os,pathlib,time,urllib.parse,urllib.request,urllib.error
 TARGET='https://web3-market-center.raymondhuangj.chatgpt.site/api/admin/ingest'
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self,*args,**kwargs):raise RuntimeError('Redirect refused')
@@ -18,10 +18,15 @@ def main():
     fields=['iss','repository','repository_id','repository_owner_id','repository_visibility','ref','ref_type','workflow_ref','event_name','runner_environment','sub','iat','nbf','exp','run_id','run_attempt','run_number']
     print(json.dumps({'oidcIdentity':{k:claims.get(k) for k in fields},'audienceMatches':claims.get('aud')==audience}))
     request=urllib.request.Request(TARGET,data=body,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json','User-Agent':'Web3MarketDataCenter/1.0 (+https://github.com/raymondhuang1994/web3-market-data-center)'},method='POST')
-    with opener.open(request,timeout=120) as response:
-        result=json.load(response)
-        if not result.get('accepted'):raise RuntimeError('Snapshot rejected')
-        print(json.dumps(result))
+    for attempt in range(3):
+        with opener.open(request,timeout=120) as response:
+            result=json.load(response)
+            if not result.get('accepted'):raise RuntimeError('Snapshot rejected')
+            print(json.dumps(result))
+            (pathlib.Path(__file__).resolve().parents[1]/'work/receipt.json').write_text(json.dumps(result))
+            if result.get('archived'):return
+        time.sleep(2)
+    raise RuntimeError('Data published, but archive failed; old report retained and unarchived snapshot protected')
 if __name__=='__main__':
     try:main()
     except urllib.error.HTTPError as error:

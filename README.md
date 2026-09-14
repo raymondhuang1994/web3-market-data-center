@@ -1,3 +1,5 @@
+> v0.2：新增逐项数据核验 `/sources`、整站报告 `/report` 与每日 PDF 下载。实现细节与剩余缺口见 [docs/RELEASE_V2.md](docs/RELEASE_V2.md)。
+
 # Web3 市场数据中心
 
 面向高管与营销团队的中文市场看板。覆盖 CEX、DEX、代币化股票及 Hyperliquid；以真实来源快照作图，明确区分已接入、源数据延迟、口径待核和待接入。
@@ -14,6 +16,7 @@
 - Robinhood Chain 四个标签、热门板块 28 类目录完整保留。
 - CEX 网站流量/期权和 UNI Burn 已按要求排除；DEX 现货与永续市场份额保留待接入。
 - AI 解读保留待接入状态；未购买 AI 服务、数据 API 或安装新数据插件。
+- 逐项数据核验记录实际采集时间、来源日期、粒度、单位和可靠性；整站 PDF 覆盖 32 个子标签，并附 7 张关键明细表全部已采集记录。
 
 ## 本地运行
 
@@ -27,7 +30,7 @@ pnpm typecheck
 pnpm build
 ```
 
-使用 Sites 的 vinext / React / Recharts / shadcn UI，D1 负责生产快照。`.openai/hosting.json` 只含非敏感逻辑绑定，真实资源由 Sites 配置。
+使用 Sites 的 vinext / React / Recharts / shadcn UI，D1 负责生产快照和报告元数据，R2 保存 PDF 与快照归档。`.openai/hosting.json` 只含非敏感逻辑绑定，真实资源由 Sites 配置。
 
 ## 每日更新
 
@@ -37,7 +40,8 @@ GitHub Actions `.github/workflows/update-data.yml` 在北京时间 09:17、13:47
 2. `collect.py` 输出临时候选快照（不提交 raw 响应，不将受限费用并入候选）。
 3. `publish.py` 获取短期 GitHub OIDC 身份，audience 绑定上传正文 SHA-256，不需要长期共享 secret。
 4. 网站验证仓库/owner ID、分支、工作流、事件、签名、有效期、数据契约和来源白名单。
-5. D1 事务以 compare-and-swap 发布快照，失败保留上一有效版本，单来源失败保留其原日期；保留最近 3 批数据与 7 天收据。
+5. D1 事务以 compare-and-swap 发布快照，失败保留上一有效版本，单来源失败保留其原日期。最近 60 批保留在 D1，更旧数据仅在已归档到 R2 后清理；身份收据保留 7 天。
+6. Playwright 使用已接受的固定快照生成整站 PDF，验证章节和图表完整后上传。PDF 失败不覆盖上一份报告，网站显示报告对应的实际批次时间。
 
 私有 Actions 及 Sites 的可用额度由账户控制；没有购买付费计划。不承诺超出既有免费额度运行。工作流失败在 GitHub Actions 可见，网站仍提供上一有效快照。
 

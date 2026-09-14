@@ -23,3 +23,16 @@ export const tokens = sqliteTable('ingest_tokens', {
   snapshotId: text('snapshot_id').notNull(),
   acceptedAt: text('accepted_at').notNull(),
 });
+export const reports = sqliteTable('reports', {
+  snapshotId: text('snapshot_id').primaryKey(),
+  objectKey: text('object_key').notNull(),
+  pdfHash: text('pdf_hash').notNull(),
+  byteCount: integer('byte_count').notNull(),
+  dataGeneratedAt: text('data_generated_at').notNull(),
+  createdAt: text('created_at').notNull(),
+  runId: text('run_id').notNull(),
+});
+export const archives = sqliteTable('snapshot_archives', {
+  snapshotId: text('snapshot_id').primaryKey(),
+  archivedAt: text('archived_at').notNull(),
+});

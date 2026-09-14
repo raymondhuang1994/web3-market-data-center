@@ -30,6 +30,10 @@ export const pages: PageDef[] = [
       {
         name: '综合对比',
         panels: [
+          p('cex_exchange_comparison', '交易所综合对比', {
+            mode: 'table',
+            full: true,
+          }),
           p('cex_spot_daily', '现货成交额排名', { mode: 'rank' }),
           p('cex_futures_daily', '合约成交额排名', { mode: 'rank' }),
           p('cex_reserves_daily', '储备资产对比', { mode: 'rank', full: true }),
@@ -48,6 +52,11 @@ export const pages: PageDef[] = [
         panels: [
           p('cex_spot_daily', '现货成交额'),
           p('cex_futures_daily', '合约成交额'),
+          p('cex_spot_daily_share', '现货成交额 · 样本份额'),
+          p('cex_futures_daily_share', '合约成交额 · 样本份额'),
+          p('cex_futures_spot_ratio_daily', '同平台合约 / 现货比', {
+            full: true,
+          }),
         ],
       },
       {
@@ -55,6 +64,11 @@ export const pages: PageDef[] = [
         panels: [
           p('cex_spot_monthly', '月度现货成交额'),
           p('cex_futures_monthly', '月度合约成交额'),
+          p('cex_spot_monthly_share', '月度现货 · 样本份额'),
+          p('cex_futures_monthly_share', '月度合约 · 样本份额'),
+          p('cex_futures_spot_ratio_monthly', '同平台月度合约 / 现货比', {
+            full: true,
+          }),
         ],
       },
     ],
@@ -70,6 +84,7 @@ export const pages: PageDef[] = [
         panels: [
           p('cex_reserves_daily', '储备资产趋势', { full: true }),
           p('cex_reserves_daily', '储备资产排名', { mode: 'rank' }),
+          p('cex_reserves_daily_share', '储备资产 · 样本份额'),
           p('cex_reserve_score', '储备可信度评分', {
             note: '评分方法和证据标准待确认，不复制原作者主观评分。',
           }),
@@ -139,7 +154,7 @@ export const pages: PageDef[] = [
         name: 'Z-score',
         panels: [
           p('funding_zscore', '资金费率 Z-score', {
-            note: '标准化窗口、时区与结算周期统一后接入。',
+            note: '保留单交易对与聚合两类 Z-score；标准化窗口、时区与结算周期统一后分别接入。',
           }),
         ],
       },
@@ -162,7 +177,7 @@ export const pages: PageDef[] = [
         name: '其他资产',
         panels: [
           p('aggregated_other', '其他资产聚合成交量', {
-            note: '当前已核验 BTC 历史。其他标的保留入口，逐一验证后接入。',
+            note: '当前已取得 BTC 日频历史。原有其他币种/标签、1h/4h 等粒度保留范围，尚未逐项接入核验。',
           }),
         ],
       },
@@ -198,12 +213,20 @@ export const pages: PageDef[] = [
         name: '链上概览',
         panels: [
           p('rh_daily_transactions', '每日交易笔数'),
+          p('rh_daily_transactions_ma7', '交易笔数 · 7 日均线'),
           p('rh_active_wallets', '活跃钱包'),
+          p('rh_active_wallets_share', '新增 / 回访钱包构成'),
         ],
       },
       {
         name: 'DEX',
-        panels: [p('rh_dex_volume', 'DEX 日成交额', { full: true })],
+        panels: [
+          p('rh_dex_volume', 'DEX 日成交额', { full: true }),
+          p('rh_dex_volume_share', 'DEX 来源记录构成', {
+            full: true,
+            note: '来源包含路由和执行协议，去重待核；缺报日不计算完整份额，不称全行业市场份额。',
+          }),
+        ],
       },
       {
         name: 'Meme Launchpad',
@@ -216,7 +239,9 @@ export const pages: PageDef[] = [
         name: 'RWA 币股',
         panels: [
           p('rh_rwa_aum', 'RWA 资产规模'),
+          p('rh_rwa_aum_share', 'RWA 资产分类构成'),
           p('rh_rwa_volume', 'RWA 成交额'),
+          p('rh_rwa_volume_share', 'RWA 成交额构成'),
         ],
       },
     ],
@@ -306,6 +331,9 @@ export const pages: PageDef[] = [
         name: '概览',
         panels: [
           p('hl_hip3_and_crypto', 'HIP-3 与 Crypto 成交额'),
+          p('hl_hip3_and_crypto_share', 'HIP-3 / Crypto 成交额构成'),
+          p('hl_hip3_and_crypto_oi', 'HIP-3 与 Crypto 持仓量'),
+          p('hl_hip3_and_crypto_oi_share', 'HIP-3 / Crypto 持仓构成'),
           p('hl_hip3_overview', 'HIP-3 成交额与持仓'),
           p('hl_dex_totals_snapshot', '官方市场快照', {
             mode: 'table',
@@ -324,13 +352,17 @@ export const pages: PageDef[] = [
         name: '按类别',
         panels: [
           p('hl_by_category', '全市场类别成交额'),
+          p('hl_by_category_share', '全市场类别成交额构成'),
           p('hl_hip3_by_category', 'HIP-3 类别成交额'),
+          p('hl_hip3_by_category_share', 'HIP-3 类别成交额构成'),
         ],
       },
       {
         name: '按市场',
         panels: [
           p('hl_hip3_by_market', 'HIP-3 部署市场成交额', { full: true }),
+          p('hl_hip3_by_market_share', '部署市场成交额构成'),
+          p('hl_hip3_by_market_oi_share', '部署市场持仓构成'),
         ],
       },
       {

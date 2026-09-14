@@ -9,7 +9,7 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "wrangler dev --config dist/server/wrangler.json",
-    "lint": "oxlint app lib db components/dashboard.tsx tests",
+    "lint": "oxlint app lib db components/*.tsx tests",
     "format": "oxfmt",
     "test": "node --experimental-strip-types --test tests/*.test.*",
     "typecheck": "tsc --noEmit",

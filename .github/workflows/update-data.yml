@@ -22,3 +22,12 @@ jobs:
         run: python3 scripts/collect.py
       - name: Validate and publish snapshot
         run: python3 scripts/publish.py
+      - name: Install locked report renderer
+        run: |
+          npx --yes pnpm@11.19.0 --dir tooling/pdf install --frozen-lockfile --ignore-scripts
+          node tooling/pdf/node_modules/playwright/cli.js install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Generate the accepted snapshot report
+        run: node scripts/render-report.mjs
+      - name: Publish report for public download
+        run: python3 scripts/publish-report.py

@@ -25,7 +25,8 @@ def main():
         if not d or not d.get('rows') and old['rows'] or d.get('unit')!=old['unit'] or d.get('source',{}).get('url')!=old['source']['url']:
             # The server merges its actual last-good version; this empty signal
             # intentionally cannot replace production data with an old checkout.
-            d={**old,'rows':[],'status':'pending','note':'本轮来源不可用或口径变化；请求保留上一有效快照。'}
+            audit=d.get('collection') if d else None
+            d={**old,'rows':[],'status':'pending','note':'本轮来源不可用或口径变化；请求保留上一有效快照。','collection':audit or {'attemptedAt':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),'result':'failed','error':'来源未返回有效数据或数据契约发生变化'}}
         datasets.append(d)
     if not any(d['rows'] for d in datasets):raise RuntimeError('No source succeeded; previous published snapshot retained')
     result={'schemaVersion':1,'generatedAt':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),'datasets':datasets}

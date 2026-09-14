@@ -1,27 +1,29 @@
-import bootstrap from '@/data/bootstrap.json';
-import { db } from '@/lib/db';
-export async function GET() {
-  try {
-    const rows = await db()
-      .prepare(
-        'SELECT d.payload, s.generated_at FROM current_snapshot c JOIN snapshots s ON c.snapshot_id = s.id JOIN datasets d ON d.snapshot_id = s.id WHERE c.id = 1 ORDER BY d.dataset_id',
-      )
-      .all<{ payload: string; generated_at: string }>();
-    if (rows.results.length)
-      return Response.json(
-        {
-          schemaVersion: 1,
-          generatedAt: rows.results[0].generated_at,
-          datasets: rows.results.map((r) => JSON.parse(r.payload)),
-          delivery: 'live',
-        },
-        { headers: { 'Cache-Control': 'public, max-age=60' } },
-      );
-  } catch {
-    /* A failed read never removes the initial verified snapshot. */
-  }
+import { readBundle } from '@/lib/bundles';
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const snapshot = url.searchParams.get('snapshot') || undefined;
+  if (snapshot && !/^[a-f0-9]{64}$/.test(snapshot))
+    return Response.json({ error: 'Invalid snapshot' }, { status: 400 });
+  const bundle = await readBundle(snapshot);
+  if (!bundle)
+    return Response.json({ error: 'Snapshot unavailable' }, { status: 404 });
+  const ids = url.searchParams.get('ids')?.split(',').filter(Boolean);
+  if (ids && (ids.length > 80 || ids.some((id) => !/^[a-z0-9_]+$/.test(id))))
+    return Response.json({ error: 'Invalid datasets' }, { status: 400 });
   return Response.json(
-    { ...bootstrap, delivery: 'bootstrap' },
-    { headers: { 'Cache-Control': 'public, max-age=60' } },
+    {
+      ...bundle,
+      datasetCount: bundle.datasets.length,
+      withRows: bundle.datasets.filter((d) => d.rows.length).length,
+      datasets: ids
+        ? bundle.datasets.filter((d) => ids.includes(d.id))
+        : bundle.datasets,
+    },
+    {
+      headers: {
+        'Cache-Control':
+          bundle.delivery === 'live' ? 'public, max-age=60' : 'no-store',
+      },
+    },
   );
 }

@@ -38,3 +38,5 @@ next-env.d.ts
 /work/
 *.tsbuildinfo
 __pycache__/
+/output/
+/tooling/pdf/node_modules/

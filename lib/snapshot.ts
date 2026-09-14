@@ -62,6 +62,17 @@ export function validateBundle(
         Date.parse(d.asOf) > now + 86400000)
     )
       throw Error('Invalid source date');
+    if (
+      d.collection &&
+      (!['ok', 'failed', 'not-configured'].includes(d.collection.result) ||
+        typeof d.collection.attemptedAt !== 'string' ||
+        !Number.isFinite(Date.parse(d.collection.attemptedAt)) ||
+        Date.parse(d.collection.attemptedAt) > now + 60000 ||
+        (d.collection.error !== undefined &&
+          (typeof d.collection.error !== 'string' ||
+            d.collection.error.length > 2000)))
+    )
+      throw Error('Invalid collection audit');
     if (d.fetchedAt && !Number.isFinite(Date.parse(d.fetchedAt)))
       throw Error('Invalid fetched time');
     if (
@@ -119,6 +130,7 @@ export function keepLastGood(candidate: Bundle, previous: Bundle): Bundle {
     )
       return {
         ...old,
+        collection: d.collection || old.collection,
         status: (old.status === 'review'
           ? 'review'
           : 'stale') as Dataset['status'],
