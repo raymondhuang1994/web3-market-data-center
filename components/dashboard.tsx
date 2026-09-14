@@ -1,6 +1,7 @@
 'use client';
+/* oxlint-disable next/no-html-link-for-pages */
+// vinext production Link prefetch fails in this release; native links preserve full route navigation.
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Activity,
@@ -648,7 +649,7 @@ function Kpi({
   const pct =
     numeric(a) && numeric(b) && b !== 0 ? ((a - b) / Math.abs(b)) * 100 : null;
   return (
-    <Link className="kpi" href={href}>
+    <a className="kpi" href={href}>
       <div className="kpi-top">
         {title}
         <Icon size={17} />
@@ -665,7 +666,7 @@ function Kpi({
           {dataset.asOf?.slice(5, 10) || '待接入'}
         </span>
       </div>
-    </Link>
+    </a>
   );
 }
 export default function Dashboard() {
@@ -736,21 +737,21 @@ export default function Dashboard() {
   return (
     <>
       <header className="site-header">
-        <Link href="/" className="wordmark">
+        <a href="/" className="wordmark">
           <span className="wordmark-icon">
             <BarChart3 size={22} />
           </span>
           <strong>Web3 数据中心</strong>
-        </Link>
+        </a>
         <nav className="top-nav" aria-label="主要导航">
           {groups.map((g) => (
-            <Link
+            <a
               key={g.id}
               href={g.path}
               className={group === g.id ? 'active' : ''}
             >
               {g.name}
-            </Link>
+            </a>
           ))}
         </nav>
         <div className="header-end">
@@ -765,19 +766,19 @@ export default function Dashboard() {
             {pages
               .filter((p) => p.group === group)
               .map((p) => (
-                <Link
+                <a
                   key={p.path}
                   href={p.path}
                   className={p.path === pathname ? 'active' : ''}
                 >
                   {p.title}
-                </Link>
+                </a>
               ))}
           </nav>
         )}
         <div className="breadcrumb">
           <LayoutGrid size={12} />
-          <Link href="/">数据中心</Link>
+          <a href="/">数据中心</a>
           <ChevronRight size={12} />
           {page?.title || '市场总览'}
         </div>
@@ -921,10 +922,10 @@ export default function Dashboard() {
             <h2 className="section-label">
               <BarChart3 size={17} />
               交易市场<span>Trading markets</span>
-              <Link href="/cex/volume">
+              <a href="/cex/volume">
                 查看全部
                 <ArrowUpRight size={14} />
-              </Link>
+              </a>
             </h2>
             <div className="overview-grid">
               <Panel
