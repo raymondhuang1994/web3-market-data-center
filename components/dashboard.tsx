@@ -7,6 +7,7 @@ import { AnalysisSummary } from '@/components/analysis-summary';
 import { EditionStamp } from '@/components/edition-stamp';
 import type { Sector } from '@/lib/analysis';
 import { schedule } from '@/lib/quality';
+import { sectorPanels } from '@/lib/sectors';
 import {
   Activity,
   ArrowUpRight,
@@ -725,7 +726,10 @@ export default function Dashboard() {
         new Set(
           page.views
             .flatMap((v) => v.panels.flatMap((p) => dependencyIds(p.id)))
-            .concat(page.group === 'stocks' ? ['tradfi_labels'] : []),
+            .concat(page.group === 'stocks' ? ['tradfi_labels'] : [])
+            .concat(page.path === '/tokenized-stocks/sectors' && sector !== 'Stocks'
+              ? sectorPanels(sector, page.views[tab]?.name || '板块概览').map(p => p.id)
+              : []),
         ),
       )
     : [
@@ -774,15 +778,8 @@ export default function Dashboard() {
     bundle ? getDataset(bundle, id) : pending(id, id);
   const currentView = page?.views[tab] || page?.views[0];
   let definitions = currentView?.panels || [];
-  if (page?.path === '/tokenized-stocks/sectors' && sector !== 'Stocks')
-    definitions = [
-      {
-        id: `sector_${sector}`,
-        title: `${sector} 板块数据`,
-        full: true,
-        note: '该板块已保留在原站 28 类目录中，历史数据尚未完成接入；当前可在目录查看交易对覆盖数量。',
-      },
-    ];
+  if (page?.path === '/tokenized-stocks/sectors' && sector !== 'Stocks' && currentView?.name !== '实际股票代币')
+    definitions = sectorPanels(sector, currentView?.name || '板块概览');
   const datasetFor = (def: PanelDef) => {
     const d = get(def.id);
     if (def.id === 'stablecoin_marketcap') {
@@ -905,10 +902,10 @@ export default function Dashboard() {
               <div className="note-bar">
                 <Info size={15} />
                 <span>
-                  28 个原站板块完整保留。Stocks
-                  已接入历史；产品可能包含股票永续合约，不统一标为有股票兑付权的代币。
+                  28 个原站板块完整保留，成交额、持仓与费率分别标注接入状态。
+                  Stocks 为股票主题永续；实际股票代币在独立标签中按发行方与链上合约列示。
                 </span>
-                <Pick
+                {page.views[tab]?.name !== '实际股票代币' && <Pick
                   label="选择热门板块"
                   value={sector}
                   onChange={setSector}
@@ -916,7 +913,7 @@ export default function Dashboard() {
                     value: String(r.entity),
                     label: `${String(r.entity)} · ${r.pairCount} 对`,
                   }))}
-                />
+                />}
               </div>
             )}
             <Tabs

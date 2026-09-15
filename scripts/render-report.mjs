@@ -7,6 +7,7 @@ const root=path.resolve(import.meta.dirname,'..');
 const receipt=await fs.readFile(path.join(root,'work/receipt.json'),'utf8').then(JSON.parse).catch(()=>null);
 const base=args['--url'] || 'https://web3-market-center.raymondhuangj.chatgpt.site';
 const snapshot=args['--snapshot'] || receipt?.snapshotId;
+const expectedAnalysis=(!args['--snapshot'] || receipt?.snapshotId===snapshot) ? receipt?.analysisHash : null;
 if(!snapshot && !base.startsWith('http://localhost:')) throw Error('A published snapshot receipt is required');
 const output=args['--output'] || path.join(root,'work/web3-market-report.pdf');
 const reportURL=base+'/report'+(snapshot?'?snapshot='+encodeURIComponent(snapshot):'');
@@ -21,8 +22,8 @@ try {
   await page.locator('[data-report-ready="true"]').waitFor({timeout:120000});
   const manifest=JSON.parse(await page.locator('#report-manifest').textContent());
   if(snapshot && manifest.snapshotId!==snapshot) throw Error('Mixed snapshot');
-  if(receipt?.analysisHash && manifest.analysisHash!==receipt.analysisHash) throw Error('Mixed analysis');
-  if(receipt?.analysisHash && await page.locator('[data-analysis-point]').count()<4) throw Error('Missing AI commentary');
+  if(expectedAnalysis && manifest.analysisHash!==expectedAnalysis) throw Error('Mixed analysis');
+  if(expectedAnalysis && await page.locator('[data-analysis-point]').count()<4) throw Error('Missing AI commentary');
   const actualSections=await page.locator('[data-report-section]').evaluateAll(xs=>xs.map(x=>x.getAttribute('data-report-section')));
   const panelCount=await page.locator('[data-report-panel]').count();
   if(JSON.stringify(actualSections)!==JSON.stringify(manifest.sectionKeys) || panelCount!==manifest.panels) throw Error('Incomplete report scope');

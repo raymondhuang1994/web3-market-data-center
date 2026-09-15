@@ -1,4 +1,4 @@
-import bootstrap from '@/data/bootstrap.json';
+import bootstrap from '@/lib/bootstrap';
 import type { Bundle } from './data';
 import { reportStorage } from './storage';
 import { db } from './db';

@@ -54,7 +54,12 @@ export function checkClaims(
     c.event_name === 'schedule' || c.event_name === 'workflow_dispatch' || c.event_name === 'push',
     'oidc_check_46',
   );
-  assert(c.runner_environment === 'github-hosted', 'oidc_check_47');
+  // Both execution environments are authorized for this private repository's
+  // exact main workflow. Labels route work; the signed claims above bind trust.
+  assert(
+    c.runner_environment === 'github-hosted' || c.runner_environment === 'self-hosted',
+    'oidc_check_47',
+  );
   const allowed = [
     `repo:raymondhuang1994@${ownerId}/web3-market-data-center@${repoId}:ref:refs/heads/main`,
     `repo:${repo}:ref:refs/heads/main`,

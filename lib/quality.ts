@@ -8,7 +8,6 @@ export const schedule = {
 };
 export const withheldIds = [
   'dex_spot_market_share',
-  'dex_perp_market_share',
   'hl_fees_daily',
   'cex_reserve_score',
 ];
@@ -18,8 +17,8 @@ export function coverage(d: Dataset): Record<string, unknown> {
     : {};
 }
 export function sourcePolicy(d: Dataset) {
-  const official = d.id.startsWith('hl_') && d.id.endsWith('_snapshot');
   const c = coverage(d);
+  const official = (d.id.startsWith('hl_') && d.id.endsWith('_snapshot')) || c.sourceTier === 'official';
   const blocked = withheldIds.includes(d.id) || !d.rows.length;
   const unitReview = /source-|mixed|待核|来源页面|no FX/.test(d.unit);
   const definitionReview =
@@ -29,7 +28,8 @@ export function sourcePolicy(d: Dataset) {
     (d.id.startsWith('hl_') && !official);
   return {
     sourceLevel: official
-      ? '交易所官方接口'
+      ? '官方接口 / 官方公开档案'
+      : c.sourceTier === 'derived' ? '本项目按公开公式计算'
       : blocked
         ? '候选来源 / 未接入'
         : '原站聚合或查询缓存',
@@ -39,7 +39,7 @@ export function sourcePolicy(d: Dataset) {
         ? '口径待核，限参考观察'
         : '结构与基础单位已核，尚未独立对账',
     useStatus: blocked ? '未启用' : '公开使用条件待核实',
-    basis: official
+    basis: d.id.startsWith('hl_') && d.id.endsWith('_snapshot')
       ? '官方逐市场当前快照；报价币包含 USDC、USDe、USDH、USDT0，未作美元汇率换算。'
       : d.id.startsWith('rh_')
         ? '缺少查询 SQL 与主网/测试网身份核验；来源数据不能代替链上独立复算。'
@@ -114,6 +114,11 @@ export function sourceTime(s?: string | null) {
   });
 }
 export function columnUnit(d: Dataset, key: string): string {
+  if (d.id === 'stock_token_registry') return key === 'multiplier' ? '倍' : '';
+  if (key === 'volumeNominal') return '名义美元';
+  if (key === 'marketCount') return '个';
+  if (key === 'cohortVersion' || key === 'unitBasis' || key === 'observed_at') return '';
+  if (key === 'oiNative') return '标的数量';
   if (
     /date|time|entity|exchange|dex|symbol|sector|referenceVenue|referenceStale|refresh_error/i.test(
       key,
@@ -160,6 +165,7 @@ export function projectedRows(d: Dataset): Row[] {
   );
 }
 export function dependencyIds(id: string): string[] {
+  if (id === 'dex_perp_market_share') return [id];
   if (withheldIds.includes(id)) return [id];
   if (id === 'cex_exchange_comparison')
     return [
@@ -206,6 +212,9 @@ export function unitLabel(unit: string) {
         'source-unit': '源单位（待核）',
         mixed: '混合指标，见列单位',
         ratio: '倍',
+        fraction: '已结算日费率（小数）',
+        'z-score': '标准差',
+        assets: '资产身份（非市场规模）',
         count: '次',
         addresses: '地址',
         tokens: '代币数量',

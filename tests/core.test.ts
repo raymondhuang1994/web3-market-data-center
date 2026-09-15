@@ -63,6 +63,13 @@ void test('claim allowlist rejects wrong repository, branch, event, audience, ex
       key,
     );
 });
+void test('self-hosted authorization preserves repository and main-workflow restrictions', () => {
+  checkClaims({...claims,runner_environment:'self-hosted'},hash,seconds);
+  for (const value of [undefined,null,'','macOS','unknown',true])
+    assert.throws(()=>checkClaims({...claims,runner_environment:value},hash,seconds));
+  for (const change of [{ref:'refs/heads/dev'},{repository_id:'1'},{workflow_ref:'other'},{aud:'other'}])
+    assert.throws(()=>checkClaims({...claims,runner_environment:'self-hosted',...change},hash,seconds));
+});
 void test('RS256 signature validation rejects altered payload and attacker key headers', async () => {
   const key = await crypto.subtle.generateKey(
     {

@@ -1,7 +1,9 @@
 import { pages, type PanelDef } from './catalog.ts';
 import { getDataset, numeric, type Bundle, type Dataset } from './data.ts';
 import { columnUnit, dependencyIds, projectedRows } from './quality.ts';
-export const reportVersion = '2026-09-v3';
+import { sectorPanels, sectorViews } from './sectors.ts';
+import bootstrap from '../data/bootstrap.json' with { type: 'json' };
+export const reportVersion = '2026-09-v4';
 export const overviewPanels: PanelDef[] = [
   { id: 'cex_spot_daily', title: '现货交易活跃度' },
   { id: 'cex_futures_daily', title: '合约交易活跃度' },
@@ -21,6 +23,11 @@ export function reportSections() {
         panels: v.panels,
       })),
     ),
+    ...(bootstrap as unknown as Bundle).datasets.find(d => d.id === 'tradfi_labels')!.rows
+      .filter(r => r.entity !== 'Stocks').flatMap(r => sectorViews.map(view => ({
+        path: '/tokenized-stocks/sectors', title: String(r.entity),
+        view: String(r.entity) + ' · ' + view, panels: sectorPanels(String(r.entity), view),
+      }))),
   ];
 }
 export function reportDataset(
@@ -116,6 +123,8 @@ export const detailColumns: Record<string, string[]> = {
     'oi_usd_mark',
     'funding_hourly',
   ],
+  stock_token_registry: ['entity','issuer','chainId','contract','multiplier','assetStatus'],
+  dex_perp_market_share: ['date','entity','value','volumeNominal','marketCount','observed_at','cohortVersion'],
 };
 export function tableColumns(d: Dataset) {
   const all = Array.from(new Set(d.rows.flatMap((r) => Object.keys(r))));

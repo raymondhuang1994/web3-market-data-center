@@ -24,7 +24,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   update:
-    runs-on: ubuntu-latest
+    if: github.repository == 'raymondhuang1994/web3-market-data-center' && github.ref == 'refs/heads/main'
+    runs-on: ${{ vars.WEB3_RUNNER == 'mac' && fromJSON('["self-hosted","macOS","ARM64","web3-data-center"]') || 'ubuntu-latest' }}
     timeout-minutes: 20
     permissions:
       contents: read
@@ -33,6 +34,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Select daily phase
         id: plan
         run: python3 scripts/workflow-plan.py
@@ -54,8 +56,13 @@ jobs:
         if: steps.plan.outputs.phase == 'finalize' && steps.analysis.outputs.published != 'true'
         run: |
           npx --yes pnpm@11.19.0 --filter web3-report-renderer install --frozen-lockfile --ignore-scripts
-          node tooling/pdf/node_modules/playwright/cli.js install --with-deps chromium
-          sudo apt-get install -y fonts-noto-cjk
+          if [[ "$RUNNER_OS" == "macOS" ]]; then
+            test -x '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+            echo 'PDF_CHROMIUM_PATH=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' >> "$GITHUB_ENV"
+          else
+            node tooling/pdf/node_modules/playwright/cli.js install --with-deps chromium
+            sudo apt-get install -y fonts-noto-cjk
+          fi
       - name: Generate the complete report from the frozen edition
         if: steps.plan.outputs.phase == 'finalize' && steps.analysis.outputs.published != 'true'
         run: node scripts/render-report.mjs

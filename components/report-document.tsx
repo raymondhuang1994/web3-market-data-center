@@ -454,9 +454,9 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
               <tr key={String(r.entity)}>
                 <td>{String(r.entity)}</td>
                 <td>
-                  {r.entity === 'Stocks'
-                    ? '已取得历史，产品身份与上游口径仍需核验'
-                    : '只取得目录，独立历史尚未接入'}{' '}
+                  {getDataset(bundle, r.entity === 'Stocks' ? 'tradfi_stocks' : 'sector_'+r.entity).rows.length
+                    ? '已取得历史，成交额、持仓、费率分别验收；见对应章节'
+                    : '本版历史数据暂缺；目录保留'}{' '}
                   · 来源覆盖 {String(r.pairCount)} 对
                 </td>
               </tr>

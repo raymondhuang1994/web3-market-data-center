@@ -108,7 +108,7 @@ void test('chain table projection cannot retain coin totals', () => {
 void test('report preserves route, tab, sector, table field and row coverage', () => {
   const manifest = reportManifest(b);
   assert.equal(manifest.routes, 13);
-  assert.equal(manifest.sections, 33);
+  assert.equal(manifest.sections, 115);
   assert.equal(manifest.sectors.length, 28);
   for (const id of manifest.detailDatasets) {
     const d = getDataset(b, id);

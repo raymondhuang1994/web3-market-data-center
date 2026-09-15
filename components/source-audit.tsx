@@ -48,6 +48,7 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
   const sectors = getDataset(bundle, 'tradfi_labels').rows.filter(
     (r) => r.entity !== 'Stocks',
   );
+  const missingSectors = sectors.filter(r => !getDataset(bundle, 'sector_'+r.entity).rows.length);
   return (
     <>
       <EditionStamp bundle={bundle} />
@@ -66,7 +67,7 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
         <p>
           {bundle.datasets.length} 个源数据集 ·{' '}
           {bundle.datasets.filter((d) => d.rows.length).length} 个有记录 ·{' '}
-          {gaps.length} 个额外待接入组件 · {sectors.length}{' '}
+          {gaps.length} 个额外待接入组件 · {missingSectors.length}{' '}
           个仅有目录的板块。此处不将“有记录”当作可对外引用的完成率。
         </p>
       </div>
@@ -90,6 +91,7 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
             const p = sourcePolicy(d),
               f = freshness(d),
               c = coverage(d);
+            const verification = c.officialVerification as { reason?:string; through?:string; relativeDifferencePct?:number } | undefined;
             return (
               <section className="audit-item" id={d.id} key={d.id}>
                 <div className="audit-item-title">
@@ -145,6 +147,9 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
                   </div>
                 </div>
                 <p className="audit-note">{p.basis || d.note}</p>
+                {verification && <p className="audit-note">官方复核：{verification.reason} 档案截至 {verification.through || '未提供'}。
+                  {typeof verification.relativeDifferencePct === 'number' && `同日不同采样时点的数值差 ${verification.relativeDifferencePct.toFixed(3)}%，不视为一致性认证。`}
+                </p>}
                 {d.collection?.error && (
                   <p className="audit-error">最近失败：{d.collection.error}</p>
                 )}
@@ -254,8 +259,10 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
               <TableRow key={String(r.entity)}>
                 <TableCell>{String(r.entity)}</TableCell>
                 <TableCell>
-                  仅取得目录（来源覆盖 {String(r.pairCount)}{' '}
-                  对）；未取得独立历史，不据此声称完整板块数据。
+                  {getDataset(bundle, 'sector_'+r.entity).rows.length
+                    ? '本版已有成交历史；持仓和费率分别查看上方数据项'
+                    : '本版历史暂缺，目录保留'}
+                  （来源目录覆盖 {String(r.pairCount)} 对）。
                 </TableCell>
               </TableRow>
             ))}

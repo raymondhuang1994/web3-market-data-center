@@ -1,4 +1,4 @@
-import bootstrap from '@/data/bootstrap.json';
+import bootstrap from '@/lib/bootstrap';
 import { archiveBundle } from '@/lib/archive';
 import { readBundle } from '@/lib/bundles';
 import { db } from '@/lib/db';

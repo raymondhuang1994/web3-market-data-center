@@ -1,4 +1,22 @@
 import type { Bundle, Dataset } from './data';
+const perpCohort = 'hl-core-hip3_dydx-v4_lighter-eth-v1';
+const perpProtocols = ['Hyperliquid (Core + HIP-3)', 'dYdX v4', 'Lighter'];
+export function validatePerpSample(d: Dataset) {
+  if (!d.rows.length) return;
+  if (d.unit !== '%' || d.source.url !== 'https://github.com/raymondhuang1994/web3-market-data-center/blob/main/docs/SAMPLE_SHARE.md')
+    throw Error('Unapproved sample definition');
+  const groups = new Map<string, typeof d.rows>();
+  for (const r of d.rows) groups.set(String(r.date), [...(groups.get(String(r.date)) || []), r]);
+  for (const rows of groups.values()) {
+    if (rows.length !== 3 || new Set(rows.map(r => r.entity)).size !== 3 || rows.some(r =>
+      !perpProtocols.includes(String(r.entity)) || r.cohortVersion !== perpCohort ||
+      typeof r.volumeNominal !== 'number' || !Number.isFinite(r.volumeNominal) || r.volumeNominal < 0 ||
+      typeof r.value !== 'number' || !Number.isFinite(r.value))) throw Error('Incomplete fixed sample');
+    const total = rows.reduce((n,r) => n + (r.volumeNominal as number),0);
+    if (total <= 0 || rows.some(r => Math.abs((r.value as number)-(r.volumeNominal as number)/total*100)>1e-7))
+      throw Error('Invalid sample shares');
+  }
+}
 export function validateBundle(
   input: unknown,
   baseline: Bundle,
@@ -28,6 +46,7 @@ export function validateBundle(
     if (!original || seen.has(d.id))
       throw Error('Unknown or duplicate dataset');
     seen.add(d.id);
+    if (d.id === 'dex_perp_market_share') validatePerpSample(d);
     if (original.status === 'review' && d.status === 'ready')
       throw Error('Unapproved quality promotion');
     if (
@@ -79,7 +98,6 @@ export function validateBundle(
       [
         'hl_fees_daily',
         'dex_spot_market_share',
-        'dex_perp_market_share',
         'cex_reserve_score',
       ].includes(d.id) &&
       d.rows.length
@@ -90,7 +108,7 @@ export function validateBundle(
     if (
       d.rows.length &&
       !d.rows.some((row) =>
-        original.measures.some((key) => typeof row[key] === 'number'),
+        (original.rows.length ? original.measures : d.measures).some((key) => typeof row[key] === 'number'),
       )
     )
       throw Error('Missing measure');
@@ -138,6 +156,12 @@ export function keepLastGood(candidate: Bundle, previous: Bundle): Bundle {
           ? old.note
           : old.note + ' 本轮来源失败或日期回退，保留上一有效快照。',
       };
+    if (d.id === 'dex_perp_market_share' && d.rows.length && old?.rows.length) {
+      const cutoff = String(d.rows[0].date);
+      const rows = [...old.rows.filter(r => String(r.date)<cutoff && r.cohortVersion===perpCohort), ...d.rows];
+      const dates = [...new Set(rows.map(r => String(r.date)))].sort().slice(-180);
+      return { ...d, rows:rows.filter(r => dates.includes(String(r.date))) };
+    }
     return d;
   });
   return { ...candidate, datasets };

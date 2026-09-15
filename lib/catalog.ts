@@ -111,6 +111,7 @@ export const pages: PageDef[] = [
           p('futures_oi_exchange_btc', 'Binance · BTCUSDT 持仓量', {
             full: true,
           }),
+          p('futures_oi_binance_official', 'Binance · 官方5分钟持仓档案', { full: true }),
         ],
       },
       {
@@ -132,6 +133,7 @@ export const pages: PageDef[] = [
         name: '单交易对',
         panels: [
           p('funding_btc', 'Binance · BTCUSDT 资金费率', { full: true }),
+          p('funding_btc_settled', 'Binance · 官方已结算日费率（月度档案）', { full: true }),
         ],
       },
       {
@@ -154,7 +156,7 @@ export const pages: PageDef[] = [
         name: 'Z-score',
         panels: [
           p('funding_zscore', '资金费率 Z-score', {
-            note: '保留单交易对与聚合两类 Z-score；标准化窗口、时区与结算周期统一后分别接入。',
+            note: 'Binance官方已结算日费率，连续90个完整UTC日、窗口含当日、总体标准差。档案截止日期见图；原聚合加权Z-score继续待核验。',
           }),
         ],
       },
@@ -187,7 +189,7 @@ export const pages: PageDef[] = [
     path: '/dex/market-share',
     group: 'dex',
     title: 'DEX 市场份额',
-    description: '现货 DEX 与永续 DEX 分开比较，份额分母采用完整可比样本。',
+    description: '现货与永续分开；永续展示已接入协议样本内份额，覆盖集合与实际采样时刻逐项列明。',
     views: [
       {
         name: '现货 DEX',
@@ -198,7 +200,7 @@ export const pages: PageDef[] = [
       {
         name: '永续 DEX',
         panels: [
-          p('dex_perp_market_share', '永续 DEX 市场份额', { full: true }),
+          p('dex_perp_market_share', '永续 DEX · 已接入协议样本内份额', { full: true, mode: 'rank' }),
         ],
       },
     ],
@@ -256,7 +258,7 @@ export const pages: PageDef[] = [
       {
         name: '板块概览',
         panels: [
-          p('tradfi_stocks', '股票板块成交额'),
+          p('tradfi_stocks', '股票主题永续 · 板块成交额'),
           p('tradfi_stock_assets', '股票标的成交额'),
           p('tradfi_stock_exchanges', '交易所股票成交额'),
           p('tradfi_stock_oi_assets', '股票标的持仓量'),
@@ -280,6 +282,13 @@ export const pages: PageDef[] = [
             full: true,
           }),
         ],
+      },
+      {
+        name: '实际股票代币',
+        panels: [p('stock_token_registry', '实际股票代币 · 官方合约目录', {
+          mode: 'table', full: true,
+          note: '保留股票主题永续；本表单独列实际股票代币身份。发行量与代币成交额没有验证时保持暂缺。',
+        })],
       },
     ],
   },

@@ -1,0 +1,5009 @@
+[
+  {
+    "id": "dex_perp_market_share",
+    "title": "永续DEX · 已接入协议样本内份额",
+    "source": {
+      "name": "官方市场接口 · 本项目固定样本计算",
+      "url": "https://github.com/raymondhuang1994/web3-market-data-center/blob/main/docs/SAMPLE_SHARE.md"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot series",
+    "unit": "%",
+    "dimensions": [
+      "date",
+      "entity"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "固定覆盖Hyperliquid（Core + HIP-3）、dYdX v4和Lighter永续。任一家失败时保留上一完整样本，不缩小分母。",
+    "coverage": {
+      "sourceTier": "derived",
+      "cohortVersion": "hl-core-hip3_dydx-v4_lighter-eth-v1",
+      "expectedProtocols": [
+        "Hyperliquid (Core + HIP-3)",
+        "dYdX v4",
+        "Lighter"
+      ]
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053528Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 1 (L1)",
+    "title": "Layer 1 (L1) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+1+%28L1%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 1 (L1)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052431Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 1 (L1)_assets",
+    "title": "Layer 1 (L1) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+1+%28L1%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 1 (L1)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052455Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 1 (L1)_exchanges",
+    "title": "Layer 1 (L1) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+1+%28L1%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 1 (L1)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052464Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 1 (L1)_oi_assets",
+    "title": "Layer 1 (L1) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+1+%28L1%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 1 (L1)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052471Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 1 (L1)_oi_exchanges",
+    "title": "Layer 1 (L1) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+1+%28L1%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 1 (L1)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052478Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 1 (L1)_funding",
+    "title": "Layer 1 (L1) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+1+%28L1%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 1 (L1)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052484Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Finance (DeFi)",
+    "title": "Decentralized Finance (DeFi) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Finance+%28DeFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Finance (DeFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052493Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Finance (DeFi)_assets",
+    "title": "Decentralized Finance (DeFi) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Finance+%28DeFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Finance (DeFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052500Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Finance (DeFi)_exchanges",
+    "title": "Decentralized Finance (DeFi) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Finance+%28DeFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Finance (DeFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052507Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Finance (DeFi)_oi_assets",
+    "title": "Decentralized Finance (DeFi) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Finance+%28DeFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Finance (DeFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052514Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Finance (DeFi)_oi_exchanges",
+    "title": "Decentralized Finance (DeFi) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Finance+%28DeFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Finance (DeFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052520Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Finance (DeFi)_funding",
+    "title": "Decentralized Finance (DeFi) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Finance+%28DeFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Finance (DeFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052527Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Binance Alpha Spotlight",
+    "title": "Binance Alpha Spotlight · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Binance+Alpha+Spotlight&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Binance Alpha Spotlight",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052534Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Binance Alpha Spotlight_assets",
+    "title": "Binance Alpha Spotlight · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Binance+Alpha+Spotlight&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Binance Alpha Spotlight",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052540Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Binance Alpha Spotlight_exchanges",
+    "title": "Binance Alpha Spotlight · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Binance+Alpha+Spotlight&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Binance Alpha Spotlight",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052546Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Binance Alpha Spotlight_oi_assets",
+    "title": "Binance Alpha Spotlight · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Binance+Alpha+Spotlight&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Binance Alpha Spotlight",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052552Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Binance Alpha Spotlight_oi_exchanges",
+    "title": "Binance Alpha Spotlight · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Binance+Alpha+Spotlight&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Binance Alpha Spotlight",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052558Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Binance Alpha Spotlight_funding",
+    "title": "Binance Alpha Spotlight · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Binance+Alpha+Spotlight&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Binance Alpha Spotlight",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052564Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Made in USA",
+    "title": "Made in USA · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Made+in+USA&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Made in USA",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052570Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Made in USA_assets",
+    "title": "Made in USA · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Made+in+USA&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Made in USA",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052576Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Made in USA_exchanges",
+    "title": "Made in USA · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Made+in+USA&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Made in USA",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052581Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Made in USA_oi_assets",
+    "title": "Made in USA · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Made+in+USA&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Made in USA",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052588Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Made in USA_oi_exchanges",
+    "title": "Made in USA · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Made+in+USA&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Made in USA",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052594Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Made in USA_funding",
+    "title": "Made in USA · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Made+in+USA&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Made in USA",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052600Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Meme",
+    "title": "Meme · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052607Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Meme_assets",
+    "title": "Meme · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052612Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Meme_exchanges",
+    "title": "Meme · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052618Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Meme_oi_assets",
+    "title": "Meme · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052624Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Meme_oi_exchanges",
+    "title": "Meme · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052630Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Meme_funding",
+    "title": "Meme · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052636Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Artificial Intelligence (AI)",
+    "title": "Artificial Intelligence (AI) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Artificial+Intelligence+%28AI%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Artificial Intelligence (AI)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052644Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Artificial Intelligence (AI)_assets",
+    "title": "Artificial Intelligence (AI) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Artificial+Intelligence+%28AI%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Artificial Intelligence (AI)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052651Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Artificial Intelligence (AI)_exchanges",
+    "title": "Artificial Intelligence (AI) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Artificial+Intelligence+%28AI%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Artificial Intelligence (AI)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052657Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Artificial Intelligence (AI)_oi_assets",
+    "title": "Artificial Intelligence (AI) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Artificial+Intelligence+%28AI%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Artificial Intelligence (AI)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052664Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Artificial Intelligence (AI)_oi_exchanges",
+    "title": "Artificial Intelligence (AI) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Artificial+Intelligence+%28AI%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Artificial Intelligence (AI)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052670Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Artificial Intelligence (AI)_funding",
+    "title": "Artificial Intelligence (AI) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Artificial+Intelligence+%28AI%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Artificial Intelligence (AI)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052677Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Proof of Work (PoW)",
+    "title": "Proof of Work (PoW) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Proof+of+Work+%28PoW%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Proof of Work (PoW)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052684Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Proof of Work (PoW)_assets",
+    "title": "Proof of Work (PoW) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Proof+of+Work+%28PoW%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Proof of Work (PoW)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052692Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Proof of Work (PoW)_exchanges",
+    "title": "Proof of Work (PoW) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Proof+of+Work+%28PoW%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Proof of Work (PoW)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052698Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Proof of Work (PoW)_oi_assets",
+    "title": "Proof of Work (PoW) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Proof+of+Work+%28PoW%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Proof of Work (PoW)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052705Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Proof of Work (PoW)_oi_exchanges",
+    "title": "Proof of Work (PoW) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Proof+of+Work+%28PoW%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Proof of Work (PoW)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052711Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Proof of Work (PoW)_funding",
+    "title": "Proof of Work (PoW) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Proof+of+Work+%28PoW%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Proof of Work (PoW)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052717Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_NFT",
+    "title": "NFT · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=NFT&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "NFT",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052723Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_NFT_assets",
+    "title": "NFT · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=NFT&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "NFT",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052728Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_NFT_exchanges",
+    "title": "NFT · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=NFT&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "NFT",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052734Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_NFT_oi_assets",
+    "title": "NFT · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=NFT&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "NFT",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052739Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_NFT_oi_exchanges",
+    "title": "NFT · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=NFT&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "NFT",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052745Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_NFT_funding",
+    "title": "NFT · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=NFT&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "NFT",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052751Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Exchange (DEX)",
+    "title": "Decentralized Exchange (DEX) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Exchange+%28DEX%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Exchange (DEX)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052758Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Exchange (DEX)_assets",
+    "title": "Decentralized Exchange (DEX) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Exchange+%28DEX%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Exchange (DEX)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052764Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Exchange (DEX)_exchanges",
+    "title": "Decentralized Exchange (DEX) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Exchange+%28DEX%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Exchange (DEX)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052771Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Exchange (DEX)_oi_assets",
+    "title": "Decentralized Exchange (DEX) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Exchange+%28DEX%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Exchange (DEX)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052777Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Exchange (DEX)_oi_exchanges",
+    "title": "Decentralized Exchange (DEX) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Exchange+%28DEX%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Exchange (DEX)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052784Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Decentralized Exchange (DEX)_funding",
+    "title": "Decentralized Exchange (DEX) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Decentralized+Exchange+%28DEX%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Decentralized Exchange (DEX)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052790Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 2 (L2)",
+    "title": "Layer 2 (L2) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+2+%28L2%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 2 (L2)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052796Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 2 (L2)_assets",
+    "title": "Layer 2 (L2) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+2+%28L2%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 2 (L2)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052802Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 2 (L2)_exchanges",
+    "title": "Layer 2 (L2) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+2+%28L2%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 2 (L2)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052809Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 2 (L2)_oi_assets",
+    "title": "Layer 2 (L2) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+2+%28L2%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 2 (L2)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052815Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 2 (L2)_oi_exchanges",
+    "title": "Layer 2 (L2) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+2+%28L2%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 2 (L2)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052822Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Layer 2 (L2)_funding",
+    "title": "Layer 2 (L2) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Layer+2+%28L2%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Layer 2 (L2)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052830Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Real World Assets (RWA)",
+    "title": "Real World Assets (RWA) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Real+World+Assets+%28RWA%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Real World Assets (RWA)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052838Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Real World Assets (RWA)_assets",
+    "title": "Real World Assets (RWA) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Real+World+Assets+%28RWA%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Real World Assets (RWA)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052846Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Real World Assets (RWA)_exchanges",
+    "title": "Real World Assets (RWA) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Real+World+Assets+%28RWA%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Real World Assets (RWA)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052852Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Real World Assets (RWA)_oi_assets",
+    "title": "Real World Assets (RWA) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Real+World+Assets+%28RWA%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Real World Assets (RWA)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052859Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Real World Assets (RWA)_oi_exchanges",
+    "title": "Real World Assets (RWA) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Real+World+Assets+%28RWA%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Real World Assets (RWA)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052866Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Real World Assets (RWA)_funding",
+    "title": "Real World Assets (RWA) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Real+World+Assets+%28RWA%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Real World Assets (RWA)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052872Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_World Liberty Financial Portfolio",
+    "title": "World Liberty Financial Portfolio · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=World+Liberty+Financial+Portfolio&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "World Liberty Financial Portfolio",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052879Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_World Liberty Financial Portfolio_assets",
+    "title": "World Liberty Financial Portfolio · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=World+Liberty+Financial+Portfolio&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "World Liberty Financial Portfolio",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052885Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_World Liberty Financial Portfolio_exchanges",
+    "title": "World Liberty Financial Portfolio · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=World+Liberty+Financial+Portfolio&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "World Liberty Financial Portfolio",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052891Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_World Liberty Financial Portfolio_oi_assets",
+    "title": "World Liberty Financial Portfolio · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=World+Liberty+Financial+Portfolio&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "World Liberty Financial Portfolio",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052897Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_World Liberty Financial Portfolio_oi_exchanges",
+    "title": "World Liberty Financial Portfolio · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=World+Liberty+Financial+Portfolio&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "World Liberty Financial Portfolio",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052903Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_World Liberty Financial Portfolio_funding",
+    "title": "World Liberty Financial Portfolio · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=World+Liberty+Financial+Portfolio&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "World Liberty Financial Portfolio",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052909Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Gaming (GameFi)",
+    "title": "Gaming (GameFi) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Gaming+%28GameFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Gaming (GameFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052917Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Gaming (GameFi)_assets",
+    "title": "Gaming (GameFi) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Gaming+%28GameFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Gaming (GameFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052923Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Gaming (GameFi)_exchanges",
+    "title": "Gaming (GameFi) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Gaming+%28GameFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Gaming (GameFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052930Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Gaming (GameFi)_oi_assets",
+    "title": "Gaming (GameFi) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Gaming+%28GameFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Gaming (GameFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052939Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Gaming (GameFi)_oi_exchanges",
+    "title": "Gaming (GameFi) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Gaming+%28GameFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Gaming (GameFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052947Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Gaming (GameFi)_funding",
+    "title": "Gaming (GameFi) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Gaming+%28GameFi%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Gaming (GameFi)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052954Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Zero Knowledge (ZK)",
+    "title": "Zero Knowledge (ZK) · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Zero+Knowledge+%28ZK%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Zero Knowledge (ZK)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052961Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Zero Knowledge (ZK)_assets",
+    "title": "Zero Knowledge (ZK) · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Zero+Knowledge+%28ZK%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Zero Knowledge (ZK)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052968Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Zero Knowledge (ZK)_exchanges",
+    "title": "Zero Knowledge (ZK) · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Zero+Knowledge+%28ZK%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Zero Knowledge (ZK)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052977Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Zero Knowledge (ZK)_oi_assets",
+    "title": "Zero Knowledge (ZK) · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Zero+Knowledge+%28ZK%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Zero Knowledge (ZK)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052985Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Zero Knowledge (ZK)_oi_exchanges",
+    "title": "Zero Knowledge (ZK) · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Zero+Knowledge+%28ZK%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Zero Knowledge (ZK)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052993Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Zero Knowledge (ZK)_funding",
+    "title": "Zero Knowledge (ZK) · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Zero+Knowledge+%28ZK%29&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Zero Knowledge (ZK)",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.052999Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_DePIN",
+    "title": "DePIN · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=DePIN&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "DePIN",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053005Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_DePIN_assets",
+    "title": "DePIN · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=DePIN&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "DePIN",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053011Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_DePIN_exchanges",
+    "title": "DePIN · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=DePIN&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "DePIN",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053017Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_DePIN_oi_assets",
+    "title": "DePIN · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=DePIN&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "DePIN",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053023Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_DePIN_oi_exchanges",
+    "title": "DePIN · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=DePIN&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "DePIN",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053029Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_DePIN_funding",
+    "title": "DePIN · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=DePIN&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "DePIN",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053035Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Commodities",
+    "title": "Commodities · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Commodities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Commodities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053041Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Commodities_assets",
+    "title": "Commodities · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Commodities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Commodities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053047Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Commodities_exchanges",
+    "title": "Commodities · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Commodities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Commodities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053053Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Commodities_oi_assets",
+    "title": "Commodities · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Commodities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Commodities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053059Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Commodities_oi_exchanges",
+    "title": "Commodities · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Commodities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Commodities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053065Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Commodities_funding",
+    "title": "Commodities · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Commodities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Commodities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053072Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Privacy",
+    "title": "Privacy · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Privacy&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Privacy",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053080Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Privacy_assets",
+    "title": "Privacy · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Privacy&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Privacy",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053086Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Privacy_exchanges",
+    "title": "Privacy · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Privacy&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Privacy",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053092Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Privacy_oi_assets",
+    "title": "Privacy · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Privacy&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Privacy",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053098Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Privacy_oi_exchanges",
+    "title": "Privacy · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Privacy&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Privacy",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053104Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Privacy_funding",
+    "title": "Privacy · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Privacy&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Privacy",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053110Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Indices",
+    "title": "Indices · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Indices&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Indices",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053115Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Indices_assets",
+    "title": "Indices · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Indices&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Indices",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053121Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Indices_exchanges",
+    "title": "Indices · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Indices&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Indices",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053126Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Indices_oi_assets",
+    "title": "Indices · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Indices&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Indices",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053132Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Indices_oi_exchanges",
+    "title": "Indices · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Indices&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Indices",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053138Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Indices_funding",
+    "title": "Indices · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Indices&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Indices",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053143Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Alleged SEC Securities",
+    "title": "Alleged SEC Securities · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Alleged+SEC+Securities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Alleged SEC Securities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053149Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Alleged SEC Securities_assets",
+    "title": "Alleged SEC Securities · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Alleged+SEC+Securities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Alleged SEC Securities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053155Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Alleged SEC Securities_exchanges",
+    "title": "Alleged SEC Securities · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Alleged+SEC+Securities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Alleged SEC Securities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053163Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Alleged SEC Securities_oi_assets",
+    "title": "Alleged SEC Securities · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Alleged+SEC+Securities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Alleged SEC Securities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053171Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Alleged SEC Securities_oi_exchanges",
+    "title": "Alleged SEC Securities · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Alleged+SEC+Securities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Alleged SEC Securities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053178Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Alleged SEC Securities_funding",
+    "title": "Alleged SEC Securities · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Alleged+SEC+Securities&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Alleged SEC Securities",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053186Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Wallets",
+    "title": "Wallets · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Wallets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Wallets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053193Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Wallets_assets",
+    "title": "Wallets · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Wallets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Wallets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053200Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Wallets_exchanges",
+    "title": "Wallets · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Wallets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Wallets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053205Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Wallets_oi_assets",
+    "title": "Wallets · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Wallets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Wallets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053211Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Wallets_oi_exchanges",
+    "title": "Wallets · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Wallets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Wallets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053216Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Wallets_funding",
+    "title": "Wallets · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Wallets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Wallets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053222Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_SocialFi",
+    "title": "SocialFi · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=SocialFi&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "SocialFi",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053240Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_SocialFi_assets",
+    "title": "SocialFi · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=SocialFi&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "SocialFi",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053247Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_SocialFi_exchanges",
+    "title": "SocialFi · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=SocialFi&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "SocialFi",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053256Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_SocialFi_oi_assets",
+    "title": "SocialFi · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=SocialFi&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "SocialFi",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053263Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_SocialFi_oi_exchanges",
+    "title": "SocialFi · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=SocialFi&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "SocialFi",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053269Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_SocialFi_funding",
+    "title": "SocialFi · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=SocialFi&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "SocialFi",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053277Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Storage",
+    "title": "Storage · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Storage&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Storage",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053284Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Storage_assets",
+    "title": "Storage · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Storage&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Storage",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053292Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Storage_exchanges",
+    "title": "Storage · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Storage&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Storage",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053300Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Storage_oi_assets",
+    "title": "Storage · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Storage&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Storage",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053306Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Storage_oi_exchanges",
+    "title": "Storage · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Storage&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Storage",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053312Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Storage_funding",
+    "title": "Storage · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Storage&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Storage",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053317Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Centralized Exchange (CEX) Token",
+    "title": "Centralized Exchange (CEX) Token · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Centralized+Exchange+%28CEX%29+Token&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Centralized Exchange (CEX) Token",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053325Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Centralized Exchange (CEX) Token_assets",
+    "title": "Centralized Exchange (CEX) Token · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Centralized+Exchange+%28CEX%29+Token&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Centralized Exchange (CEX) Token",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053333Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Centralized Exchange (CEX) Token_exchanges",
+    "title": "Centralized Exchange (CEX) Token · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Centralized+Exchange+%28CEX%29+Token&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Centralized Exchange (CEX) Token",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053342Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Centralized Exchange (CEX) Token_oi_assets",
+    "title": "Centralized Exchange (CEX) Token · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Centralized+Exchange+%28CEX%29+Token&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Centralized Exchange (CEX) Token",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053350Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Centralized Exchange (CEX) Token_oi_exchanges",
+    "title": "Centralized Exchange (CEX) Token · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Centralized+Exchange+%28CEX%29+Token&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Centralized Exchange (CEX) Token",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053358Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Centralized Exchange (CEX) Token_funding",
+    "title": "Centralized Exchange (CEX) Token · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Centralized+Exchange+%28CEX%29+Token&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Centralized Exchange (CEX) Token",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053367Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stablecoins",
+    "title": "Stablecoins · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stablecoins&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stablecoins",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053373Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stablecoins_assets",
+    "title": "Stablecoins · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stablecoins&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stablecoins",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053378Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stablecoins_exchanges",
+    "title": "Stablecoins · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stablecoins&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stablecoins",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053384Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stablecoins_oi_assets",
+    "title": "Stablecoins · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stablecoins&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stablecoins",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053389Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stablecoins_oi_exchanges",
+    "title": "Stablecoins · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stablecoins&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stablecoins",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053394Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stablecoins_funding",
+    "title": "Stablecoins · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stablecoins&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stablecoins",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053399Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stock market-themed",
+    "title": "Stock market-themed · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stock+market-themed&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stock market-themed",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053405Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stock market-themed_assets",
+    "title": "Stock market-themed · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stock+market-themed&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stock market-themed",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053410Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stock market-themed_exchanges",
+    "title": "Stock market-themed · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stock+market-themed&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stock market-themed",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053417Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stock market-themed_oi_assets",
+    "title": "Stock market-themed · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stock+market-themed&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stock market-themed",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053424Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stock market-themed_oi_exchanges",
+    "title": "Stock market-themed · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stock+market-themed&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stock market-themed",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053431Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Stock market-themed_funding",
+    "title": "Stock market-themed · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Stock+market-themed&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Stock market-themed",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053438Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Prediction Markets",
+    "title": "Prediction Markets · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Prediction+Markets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Prediction Markets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053445Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Prediction Markets_assets",
+    "title": "Prediction Markets · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Prediction+Markets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Prediction Markets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053452Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Prediction Markets_exchanges",
+    "title": "Prediction Markets · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Prediction+Markets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Prediction Markets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053459Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Prediction Markets_oi_assets",
+    "title": "Prediction Markets · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Prediction+Markets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Prediction Markets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053466Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Prediction Markets_oi_exchanges",
+    "title": "Prediction Markets · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Prediction+Markets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Prediction Markets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053472Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Prediction Markets_funding",
+    "title": "Prediction Markets · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Prediction+Markets&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Prediction Markets",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053479Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Chinese Meme",
+    "title": "Chinese Meme · 板块日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Chinese+Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Chinese Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053486Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Chinese Meme_assets",
+    "title": "Chinese Meme · 标的日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Chinese+Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Chinese Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053493Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Chinese Meme_exchanges",
+    "title": "Chinese Meme · 交易所日成交额",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Chinese+Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Chinese Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053500Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Chinese Meme_oi_assets",
+    "title": "Chinese Meme · 标的持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Chinese+Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Chinese Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053507Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Chinese Meme_oi_exchanges",
+    "title": "Chinese Meme · 交易所持仓历史",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Chinese+Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "day",
+    "unit": "USD",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Chinese Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053513Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "sector_Chinese Meme_funding",
+    "title": "Chinese Meme · 资金费率",
+    "source": {
+      "name": "吴说数据中心公开板块聚合",
+      "url": "https://data.wublock123.com/api/coinglass/futures/tradfi-volume-overview?source=tag&label=Chinese+Meme&interval=1d&limit=180"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "grain": "snapshot",
+    "unit": "source-rate",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "sourceRate"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "保留原有板块；等待每日采集与逐指标核验。",
+    "coverage": {
+      "sector": "Chinese Meme",
+      "sourceTier": "origin",
+      "licenseStatus": "unverified"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053519Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "funding_btc_settled",
+    "title": "Binance BTCUSDT 已结算日费率",
+    "source": {
+      "name": "Binance 官方公开档案",
+      "url": "https://data.binance.vision/?prefix=data/futures/um/monthly/fundingRate/BTCUSDT/"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "unit": "fraction",
+    "grain": "day",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "等待官方来源采集。",
+    "coverage": {
+      "sourceTier": "official"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053521Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "funding_zscore",
+    "title": "Binance 已结算日费率 Z-score",
+    "source": {
+      "name": "Binance 官方公开档案",
+      "url": "https://data.binance.vision/?prefix=data/futures/um/monthly/fundingRate/BTCUSDT/"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "unit": "z-score",
+    "grain": "day",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "等待官方来源采集。",
+    "coverage": {
+      "sourceTier": "official"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053523Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "futures_oi_binance_official",
+    "title": "Binance BTCUSDT 官方持仓核验",
+    "source": {
+      "name": "Binance 官方公开档案",
+      "url": "https://data.binance.vision/?prefix=data/futures/um/daily/metrics/BTCUSDT/"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "unit": "USD",
+    "grain": "5-minute",
+    "dimensions": [
+      "date"
+    ],
+    "measures": [
+      "value"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "等待官方来源采集。",
+    "coverage": {
+      "sourceTier": "official"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053524Z",
+      "result": "not-configured"
+    }
+  },
+  {
+    "id": "stock_token_registry",
+    "title": "实际股票代币 · 官方合约目录",
+    "source": {
+      "name": "Robinhood 官方股票代币目录",
+      "url": "https://api.robinhood.com/rhj/assets"
+    },
+    "fetchedAt": "",
+    "asOf": null,
+    "unit": "assets",
+    "grain": "snapshot",
+    "dimensions": [
+      "entity"
+    ],
+    "measures": [
+      "chainId"
+    ],
+    "rows": [],
+    "status": "pending",
+    "note": "等待官方来源采集。",
+    "coverage": {
+      "sourceTier": "official"
+    },
+    "collection": {
+      "attemptedAt": "2026-09-15T14:54:44.053525Z",
+      "result": "not-configured"
+    }
+  }
+]

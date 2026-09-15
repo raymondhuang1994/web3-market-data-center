@@ -150,6 +150,7 @@ export function format(v: unknown, unit = '', compact = true): string {
           ? '是'
           : '否'
         : '—';
+  if (unit === 'assets') return String(v);
   if (unit === '%')
     return v.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '%';
   if (unit === 'ratio') return v.toFixed(2) + '×';
