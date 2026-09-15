@@ -164,7 +164,11 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
     >
       <div className="report-toolbar">
         <a href="/">← 数据中心</a>
-        <a href={'/api/reports/latest?download=1&snapshot=' + bundle.snapshotId}>下载本版 PDF</a>
+        <a
+          href={'/api/reports/latest?download=1&snapshot=' + bundle.snapshotId}
+        >
+          下载本版 PDF
+        </a>
         <button onClick={() => window.print()}>打印 / 保存此报告</button>
         <a href="/sources">逐项数据核验</a>
       </div>
@@ -208,11 +212,19 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
           个板块目录集中列于附录。关键明细表的全部已采集行和字段分组进入附录；本报告不穷举历史时序的每个筛选组合。
         </p>
         <p className="report-note">
-          AI 解读由 Codex 基于本报告数据生成，具体证据和限制随解读列示。原站聚合数据的公开使用条件仍待逐项确认。
+          AI 解读由{' '}
+          {bundle.analysis?.producer === 'BigModel'
+            ? '智谱 GLM-4.7-Flash'
+            : bundle.analysis?.producer || '已配置模型'}{' '}
+          基于本报告数据生成，具体证据和限制随解读列示。原站聚合数据的公开使用条件仍待逐项确认。
         </p>
         <p>{schedule.text}；实际采样时间见附录。</p>
       </section>
-      {bundle.analysis && <section className="report-analysis-page"><AnalysisSummary bundle={bundle} report /></section>}
+      {bundle.analysis && (
+        <section className="report-analysis-page">
+          <AnalysisSummary bundle={bundle} report />
+        </section>
+      )}
       <section className="report-index">
         <h2>报告目录</h2>
         <div>
@@ -432,7 +444,11 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
             })}
             <tr>
               <td>AI 市场解读</td>
-              <td>{bundle.analysis ? "本报告已包含同快照 Codex 解读" : "等待本日报 Codex 解读"}</td>
+              <td>
+                {bundle.analysis
+                  ? '本报告已包含同快照 AI 解读'
+                  : '等待本日报 AI 解读'}
+              </td>
             </tr>
             {getDataset(bundle, 'tradfi_labels').rows.map((r) => (
               <tr key={String(r.entity)}>

@@ -17,8 +17,7 @@ export function AnalysisSummary({
       <div className="summary-strip">
         <div>
           <h2>
-            AI 市场解读{' '}
-            <span className="summary-status">等待当日 Codex 解读</span>
+            AI 市场解读 <span className="summary-status">等待当日 AI 解读</span>
           </h2>
           <p>
             每天基于同一批数据生成，目标香港时间 10:00 前与完整报告一同发布。
@@ -33,14 +32,22 @@ export function AnalysisSummary({
     <section className={report ? 'report-analysis' : 'analysis-summary'}>
       <div className="analysis-heading">
         <h2>
-          AI 市场解读 <span className="summary-status">Codex</span>
+          AI 市场解读{' '}
+          <span className="summary-status">
+            {analysis.producer === 'BigModel'
+              ? '智谱 · GLM-4.7-Flash'
+              : 'Codex'}
+          </span>
         </h2>
         <span>
           {analysis.reportDate} · {sourceTime(analysis.generatedAt)} 生成
         </span>
       </div>
       <p className="analysis-method">
-        数字由程序复算，解读与推断由 Codex 生成。数据范围和日期以各项证据为准。
+        {analysis.producer === 'BigModel'
+          ? '数字与业务判断边界由程序整理，观察性解读由智谱 GLM-4.7-Flash 生成。'
+          : '数字由程序复算，解读与推断由 Codex 生成。'}
+        数据范围和日期以各项证据为准。
       </p>
       <div className="analysis-grid">
         {points.map((p, i) => (

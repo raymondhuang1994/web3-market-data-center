@@ -24,7 +24,7 @@ export async function GET(request: Request) {
             ? 'preparing-pdf'
             : Date.now() < Date.parse(bundle.edition!.cutoffAt)
               ? 'collecting'
-              : 'awaiting-codex',
+              : 'awaiting-analysis',
         snapshotId: bundle.snapshotId,
         generatedAt: bundle.generatedAt,
         edition: bundle.edition,

@@ -4,16 +4,19 @@ on:
     # UTC: prepare twice before 09:00 Asia/Hong_Kong, every calendar day.
     - cron: '37 0 * * *'
     - cron: '52 0 * * *'
+    # Finalize after cutoff and retry before the 10:00 publication target.
+    - cron: '7 1 * * *'
+    - cron: '32 1 * * *'
   push:
     branches: [main]
     paths: ['data/analysis/*.json', 'data/requests/*.json']
   workflow_dispatch:
     inputs:
       phase:
-        description: 'Prepare data or finalize the current Codex analysis'
+        description: 'Prepare data or generate analysis and publish the daily PDF'
         type: choice
         options: [collect, finalize]
-        default: collect
+        default: finalize
 permissions:
   contents: read
 concurrency:
@@ -33,25 +36,29 @@ jobs:
       - name: Select daily phase
         id: plan
         run: python3 scripts/workflow-plan.py
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        if: steps.plan.outputs.phase == 'finalize'
+        with:
+          node-version: '24'
       - name: Collect free sources within the cutoff
         if: steps.plan.outputs.phase == 'collect'
         run: python3 scripts/collect.py
       - name: Stage validated data without changing the public edition
         if: steps.plan.outputs.phase == 'collect'
         run: python3 scripts/publish.py
-      - name: Validate Codex evidence and freeze the analysis
+      - name: Generate free BigModel analysis and freeze validated evidence
         if: steps.plan.outputs.phase == 'finalize'
         id: analysis
-        run: python3 scripts/submit-analysis.py
+        run: python3 scripts/generate-analysis.py
       - name: Install locked report renderer
         if: steps.plan.outputs.phase == 'finalize' && steps.analysis.outputs.published != 'true'
         run: |
           npx --yes pnpm@11.19.0 --filter web3-report-renderer install --frozen-lockfile --ignore-scripts
           node tooling/pdf/node_modules/playwright/cli.js install --with-deps chromium
           sudo apt-get install -y fonts-noto-cjk
-      - name: Generate data and Codex report from the frozen edition
+      - name: Generate the complete report from the frozen edition
         if: steps.plan.outputs.phase == 'finalize' && steps.analysis.outputs.published != 'true'
         run: node scripts/render-report.mjs
-      - name: Publish data, Codex analysis and PDF together
+      - name: Publish data, AI analysis and PDF together
         if: steps.plan.outputs.phase == 'finalize' && steps.analysis.outputs.published != 'true'
         run: python3 scripts/publish-report.py

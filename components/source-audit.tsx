@@ -59,7 +59,8 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
         </p>
         <p>
           <strong>最近发布：</strong>
-          {sourceTime(bundle.edition?.publishedAt || bundle.generatedAt)} · {health.text}
+          {sourceTime(bundle.edition?.publishedAt || bundle.generatedAt)} ·{' '}
+          {health.text}
           。技术接入、数据时效和口径可靠性分别判断。
         </p>
         <p>
@@ -125,7 +126,8 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
                     <small>
                       源刷新：
                       {sourceTime(
-                        metaText(c.sourceUpdatedAt,c.sourceExecutionEndedAt) || null,
+                        metaText(c.sourceUpdatedAt, c.sourceExecutionEndedAt) ||
+                          null,
                       )}
                     </small>
                   </div>
@@ -244,7 +246,8 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
             <TableRow>
               <TableCell>AI 市场解读</TableCell>
               <TableCell>
-                Codex 订阅解读；数字由程序计算、引用绑定同一数据快照。无需新增付费模型 API。
+                智谱 GLM-4.7-Flash
+                免费模型解读；数字由程序计算、引用绑定同一数据快照。密钥仅在服务端保存，未启用付费模型或搜索。
               </TableCell>
             </TableRow>
             {sectors.map((r) => (

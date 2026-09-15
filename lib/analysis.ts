@@ -23,7 +23,8 @@ export type AnalysisPoint = {
 };
 export type Analysis = {
   version: 1;
-  producer: 'Codex';
+  producer: 'Codex' | 'BigModel';
+  model?: 'glm-4.7-flash';
   snapshotId: string;
   reportDate: string;
   factsHash: string;
@@ -236,7 +237,9 @@ export async function validateAnalysis(
     hash = await factsDigest(facts);
   if (
     a.version !== 1 ||
-    a.producer !== 'Codex' ||
+    !['Codex', 'BigModel'].includes(a.producer) ||
+    (a.producer === 'BigModel' && a.model !== 'glm-4.7-flash') ||
+    (a.producer === 'Codex' && a.model !== undefined) ||
     a.snapshotId !== bundle.snapshotId ||
     a.reportDate !== bundle.edition?.reportDate ||
     a.factsHash !== hash
@@ -271,7 +274,12 @@ export async function validateAnalysis(
         typeof p[k] !== 'string' ||
         !p[k].trim() ||
         p[k].length > (k === 'title' ? 40 : 180) ||
-        /[0-9<>]/.test(p[k])
+        /[0-9０-９<>]/.test(p[k]) ||
+        /百分之|[零〇一二三四五六七八九十百千万亿两壹贰叁肆伍陆柒捌玖拾佰仟]+(?:点[零〇一二三四五六七八九]+)?(?:万|亿|美元|USDC|BTC|倍|成)|[零〇一二三四五六七八九]+点[零〇一二三四五六七八九]+|交易日/.test(
+          p[k],
+        ) ||
+        (a.producer === 'BigModel' &&
+          /本周|上周|受.{0,30}驱动|导致|引发|促成/.test(p[k]))
       )
         throw Error(
           'Commentary must be concise plain text without invented numerical claims',
@@ -282,7 +290,8 @@ export async function validateAnalysis(
     throw Error('Missing sector');
   return {
     version: 1,
-    producer: 'Codex',
+    producer: a.producer,
+    ...(a.producer === 'BigModel' ? { model: 'glm-4.7-flash' as const } : {}),
     snapshotId: a.snapshotId,
     reportDate: a.reportDate,
     factsHash: hash,
