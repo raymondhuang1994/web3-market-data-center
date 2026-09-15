@@ -2,11 +2,12 @@
 """Request server-side free BigModel generation; the API key never enters CI."""
 import datetime,json,os,pathlib,subprocess,sys,time,urllib.request,urllib.error
 from oidc_post import post
+from collect import READ_HEADERS
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 BASE='https://web3-market-center.raymondhuangj.chatgpt.site'
 date=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).date().isoformat()
 def context():
-    with urllib.request.urlopen(BASE+'/api/edition?date='+date,timeout=30) as r:return json.load(r)
+    with urllib.request.urlopen(urllib.request.Request(BASE+'/api/edition?date='+date,headers=READ_HEADERS),timeout=30) as r:return json.load(r)
 ctx=context()
 if ctx.get('status')=='waiting-for-data':
     # collect.py preserves actual pre-cutoff timestamps when recovery runs late.

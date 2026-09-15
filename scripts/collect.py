@@ -3,6 +3,7 @@
 import concurrent.futures,datetime,json,pathlib,subprocess,sys,urllib.request
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'work'
+READ_HEADERS={'User-Agent':'Web3MarketDataCenter/2.0 (+https://github.com/raymondhuang1994/web3-market-data-center)'}
 
 def align_contract(datasets,baseline):
     incoming={d['id']:d for d in datasets}
@@ -59,9 +60,9 @@ def main():
     # those observations existed at 09:00. Late jobs reuse eligible stored data.
     if now>=cutoff:
         base='https://web3-market-center.raymondhuangj.chatgpt.site'
-        with urllib.request.urlopen(base+'/api/edition?date='+date,timeout=30) as response:edition=json.load(response)
+        with urllib.request.urlopen(urllib.request.Request(base+'/api/edition?date='+date,headers=READ_HEADERS),timeout=30) as response:edition=json.load(response)
         path='/api/data'+('?snapshot='+edition['snapshotId'] if edition.get('snapshotId') else '')
-        with urllib.request.urlopen(base+path,timeout=60) as response:previous=json.load(response)
+        with urllib.request.urlopen(urllib.request.Request(base+path,headers=READ_HEADERS),timeout=60) as response:previous=json.load(response)
         if previous.get('delivery')=='bootstrap':raise RuntimeError('No trusted prior snapshot; late collection stopped')
         previous['datasets']=align_contract(previous['datasets'],baseline)
         for d in previous['datasets']:
