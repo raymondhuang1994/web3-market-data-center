@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import baseline from '../lib/bootstrap.ts';
 import { validateBundle, validatePerpSample, keepLastGood } from '../lib/snapshot.ts';
 import type { Dataset } from '../lib/data.ts';
+import { analysisFacts } from '../lib/analysis.ts';
+import { qualitativeEvidence, businessObservation } from '../lib/bigmodel.ts';
 const names=['Hyperliquid (Core + HIP-3)','dYdX v4','Lighter'];
 function sample(date='2026-09-15'): Dataset {
   const d=structuredClone(baseline.datasets.find(d=>d.id==='dex_perp_market_share')!);
@@ -32,4 +34,15 @@ void test('sample daily history preserves complete old cohorts and replaces same
   assert.equal(keepLastGood(after,saved).datasets[0].rows.length,6);
   const failed={...after,datasets:[{...sample(),rows:[]}]};
   assert.equal(keepLastGood(failed,saved).datasets[0].rows.length,6);
+});
+void test('AI uses only the latest complete sample and never invents a share trend',()=>{
+  const d=sample();d.rows=[...sample('2026-09-14').rows,...d.rows];
+  const b={...baseline,datasets:[d]};
+  const facts=analysisFacts(b);const f=facts[0];
+  assert.equal(f.values.sampleNominalVolume,200);
+  assert.equal(f.values.hyperliquidSharePct,50);
+  assert.equal(Object.hasOwn(f.values,'change1dPct'),false);
+  assert.match(qualitativeEvidence(f).observations.comparisonPeriod,/不能判断趋势/);
+  assert.match(businessObservation('dex',facts),/样本结构/);
+  d.rows.pop();assert.deepEqual(analysisFacts(b)[0].values,{});
 });

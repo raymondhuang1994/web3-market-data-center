@@ -1,4 +1,5 @@
 import type { Bundle, Dataset } from './data';
+import { validatePerpSample } from './snapshot.ts';
 
 export type Sector = 'cex' | 'dex' | 'stocks' | 'hyperliquid';
 export type Fact = {
@@ -186,6 +187,24 @@ export function analysisFacts(bundle: Bundle): Fact[] {
   }
   for (const id of ['dex_spot_market_share', 'dex_perp_market_share']) {
     const d = bundle.datasets.find((x) => x.id === id);
+    if (id === 'dex_perp_market_share' && d?.rows.length) {
+      try {
+        validatePerpSample(d);
+        const date = d.rows.map(r => String(r.date)).sort().at(-1)!;
+        const rows = d.rows.filter(r => r.date === date);
+        const share = (name: string) => rows.find(r => r.entity === name)!.value as number;
+        const total = rows.reduce((sum, r) => sum + (r.volumeNominal as number), 0);
+        facts.push({
+          ...base(d, 'dex', d.title),
+          statement: `${date} 采集的永续DEX固定协议样本内份额：` + rows.map(r => `${r.entity} ${(r.value as number).toFixed(2)}%`).join('，') + `。样本滚动成交名义额合计 ${money(total)}；统计终点未完全同步，非全市场份额。`,
+          limitation: d.note + ' 仅取最新完整样本日期，源滚动窗口终点不完全同步；不与自然日成交额比较，不判断份额趋势或全市场排名。实际采样时间另列。',
+          values: { sampleProtocolCount: rows.length, sampleNominalVolume: total,
+            hyperliquidSharePct: share('Hyperliquid (Core + HIP-3)'),
+            dydxSharePct: share('dYdX v4'), lighterSharePct: share('Lighter') },
+        });
+        continue;
+      } catch { /* Incomplete cohorts remain explicitly unavailable. */ }
+    }
     if (d)
       facts.push({
         ...base(d, 'dex', d.title),

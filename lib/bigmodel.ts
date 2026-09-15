@@ -24,7 +24,7 @@ export const ANALYST_PROMPT = `你为高管和营销团队撰写简洁、专业�
 title 不超过三十个字符，其他文本各不超过一百二十个字符；纯文本，不使用 Markdown 或 HTML。文本不出现阿拉伯数字，也不重述中文数量或百分比；精确数值和日期由网站附上程序事实。factIds 必须引用输入中本板块的一至三个真实 id。
 interpretation 说明事实观察与趋势；implication 提供有条件的业务观察；watch 指明下一步需验证的数据。区分单日变化、连续周均变化、当前快照；单日变化不得称为趋势，方向混合时如实表述。数字只能在外部事实表展示，文字不得包含百分之、中文金额或倍数；用单日、周均、滚动成交额等词描述比较期，日历日不得改称交易日。CEX 优先同时引用现货和合约事实，比较两者周均方向。不得把成交额解释为流动性、市场深度、净流入、收入、用户增长或需求变化，也不推导这些指标的变化。不能推断价格、因果、结构性机会或其他未提供的指标。业务观察应说明当前证据允许什么判断、还不足以支持什么决策，例如单日反弹不足以在营销中宣称热度持续回升。
 周均指滚动连续日历日均值相较此前等长期间，不是本周或上周；文案使用“滚动周均相较此前周期”。没有分资产、分时段数据时，不得猜测由特定资产或时段驱动，即使加上“可能”也不可以。不要给行情波动编写原因；业务观察只说明这些证据可以支持什么判断，不能支持什么判断。
-DEX 全市场份额缺失时明确不能判断排名与竞争格局，保留待接入。Stocks 主题分类并非代币化股票现货全市场；不能改写口径。Hyperliquid 当前快照不支持日度趋势，滚动成交额不与自然日相加，USDC 不等同美元。缺失、未完成或不可比的数据只能说明不足，不编造趋势。每句结论必须能由所引事实支持；推断要明确附条件。`;
+DEX有固定协议样本时可以描述样本结构，但样本滚动窗口终点未完全同步，不判断趋势或全市场排名。全市场份额缺失仍明确不可判断，保留待接入。Stocks 主题分类并非代币化股票现货全市场；不能改写口径。Hyperliquid 当前快照不支持日度趋势，滚动成交额不与自然日相加，USDC 不等同美元。缺失、未完成或不可比的数据只能说明不足，不编造趋势。每句结论必须能由所引事实支持；推断要明确附条件。`;
 
 export function qualitativeEvidence(fact: Fact) {
   const direction = (value: number | null | undefined) =>
@@ -53,7 +53,9 @@ export function qualitativeEvidence(fact: Fact) {
               ? direction(v.latest - v.mean7d)
               : '不可比',
         }
-      : { comparisonPeriod: '无同口径可比历史；不能判断趋势或高低位置' },
+      : Object.hasOwn(v, 'sampleProtocolCount')
+        ? { comparisonPeriod: '固定已接入协议样本的滚动窗口快照，终点未完全同步；缺少可比历史，不能判断趋势', coverage: '样本内份额已取得，不能推断全市场排名或竞争格局' }
+        : { comparisonPeriod: '无同口径可比历史；不能判断趋势或高低位置' },
   };
 }
 
@@ -69,7 +71,9 @@ export function businessObservation(sector: string, facts: Fact[]) {
       : '这些样本可以用于观察成交活动，不能单独作为扩大营销预算或判断资金流向的依据。';
   }
   if (sector === 'dex')
-    return '全市场份额尚不可得，暂不能用于竞争排名或市场领先的宣传。';
+    return values('dex_perp_market_share').sampleProtocolCount === 3
+      ? '可用于观察已接入协议的样本结构；统计终点未完全同步，不能用于全市场排名或领先宣传。'
+      : '全市场份额尚不可得，暂不能用于竞争排名或市场领先的宣传。';
   if (sector === 'stocks') {
     const v = values('tradfi_stocks');
     return typeof v.change1dPct === 'number' &&
@@ -125,8 +129,18 @@ export async function generateBigModelAnalysis(
         max_tokens: 3000,
       }),
     });
-  } catch {
-    throw new BigModelError('bigmodel_network_error', true);
+  } catch (error) {
+    // Only a fixed diagnostic category may leave this boundary, never the
+    // request, key, provider body or raw exception message.
+    const message = error instanceof Error ? error.message.toLowerCase() : '';
+    const category = /redirect/.test(message) ? 'redirect_rejected'
+      : /header|byte.?string|character/.test(message) ? 'invalid_header'
+      : /dns|resolve/.test(message) ? 'dns_error'
+      : /certificate|tls|ssl/.test(message) ? 'tls_error'
+      : /timeout|aborted/.test(message) ? 'timeout'
+      : /unsupported|not implemented|illegal invocation/.test(message) ? 'runtime_unsupported'
+      : 'network_error';
+    throw new BigModelError('bigmodel_' + category, !['redirect_rejected','invalid_header','runtime_unsupported'].includes(category));
   }
   if (!response.ok) {
     // Never return/log provider response bodies: they can contain account details.

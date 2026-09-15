@@ -6,6 +6,8 @@ GitHub管理代码、定时与运行日志；Mac执行项目任务；现有云�
 
 仓库变量 `WEB3_RUNNER=mac` 选择 `[self-hosted,macOS,ARM64,web3-data-center]`；其他值选择 `ubuntu-latest`。仅指定私有仓库main可以启动任务。checkout不持久化Git凭据。服务端继续校验签名、仓库/所有者ID、私有可见性、main、指定workflow和请求内容哈希；仅允许github-hosted/self-hosted两个执行环境。
 
+安装验收状态：专用运行器已注册并以用户服务运行，仓库变量已切换至Mac。窗口保活已安装；系统08:25自动唤醒仍待用户在终端完成管理员认证。没有将待认证步骤记作完成。
+
 ## 每日香港时间
 
 - 08:25：系统定时唤醒；用户LaunchAgent在接电且08:25–10:15窗口内使用caffeinate防止空闲睡眠。
