@@ -110,7 +110,9 @@ export async function generateBigModelAnalysis(
   try {
     response = await fetcher(BIGMODEL_ENDPOINT, {
       method: 'POST',
-      redirect: 'error',
+      // workerd may reject redirect:'error' before making the request.
+      // Manual mode plus an explicit 3xx rejection never forwards the key.
+      redirect: 'manual',
       signal: AbortSignal.timeout(55000),
       headers: {
         Authorization: 'Bearer ' + apiKey.trim(),
@@ -142,6 +144,8 @@ export async function generateBigModelAnalysis(
       : 'network_error';
     throw new BigModelError('bigmodel_' + category, !['redirect_rejected','invalid_header','runtime_unsupported'].includes(category));
   }
+  if (response.status >= 300 && response.status < 400)
+    throw new BigModelError('bigmodel_redirect_rejected');
   if (!response.ok) {
     // Never return/log provider response bodies: they can contain account details.
     throw new BigModelError(

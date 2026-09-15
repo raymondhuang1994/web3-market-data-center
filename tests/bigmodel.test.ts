@@ -56,7 +56,7 @@ void test('free BigModel request is server-bound, tool-free and receives only ca
   const fetcher = (async (url, init) => {
     count++;
     assert.equal(url, BIGMODEL_ENDPOINT);
-    assert.equal(init?.redirect, 'error');
+    assert.equal(init?.redirect, 'manual');
     assert.equal(typeof init?.body, 'string');
     const payload = JSON.parse(init?.body as string);
     assert.equal(payload.model, 'glm-4.7-flash');
@@ -88,6 +88,13 @@ void test('missing key and premature generation make no external call', async ()
   );
 });
 void test('provider throttling, errors and redirects never expose account response or secret', async () => {
+  let redirects = 0;
+  await assert.rejects(generateBigModelAnalysis(bundle(), 'test-secret', (async (_url, init) => {
+    redirects++;
+    assert.equal(init?.redirect, 'manual');
+    return new Response('private-account-detail', {status:307,headers:{Location:'https://example.com/untrusted'}});
+  }) as typeof fetch, now), /bigmodel_redirect_rejected/);
+  assert.equal(redirects, 1);
   for (const status of [401, 429, 500]) {
     const fetcher = (async () =>
       new Response('private-account-detail test-secret', {
