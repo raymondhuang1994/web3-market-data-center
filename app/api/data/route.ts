@@ -21,8 +21,7 @@ export async function GET(request: Request) {
     },
     {
       headers: {
-        'Cache-Control':
-          bundle.delivery === 'live' ? 'public, max-age=60' : 'no-store',
+        'Cache-Control': 'no-store',
       },
     },
   );

@@ -27,6 +27,16 @@ export type Bundle = {
   snapshotId?: string;
   datasetCount?: number;
   withRows?: number;
+  edition?: {
+    reportDate: string;
+    cutoffAt: string;
+    deadlineAt: string;
+    timezone: 'Asia/Hong_Kong';
+    calendar: { label: string; isBusinessDay: boolean | null; source: string };
+    publishedAt?: string | null;
+    analysisHash?: string | null;
+  };
+  analysis?: import('./analysis').Analysis;
 };
 export const colors = [
   '#3264e5',

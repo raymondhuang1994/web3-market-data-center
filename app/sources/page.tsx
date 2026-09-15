@@ -8,7 +8,7 @@ export default async function SourcesPage() {
     <main className="shell audit-page">
       <div className="report-toolbar">
         <a href="/">← 数据中心</a>
-        <a href="/api/reports/latest?download=1">下载整站 PDF</a>
+        <a href={'/api/reports/latest?download=1' + (bundle?.snapshotId !== 'bootstrap' ? '&snapshot=' + bundle?.snapshotId : '')}>下载整站 PDF</a>
       </div>
       <div className="page-heading">
         <div>

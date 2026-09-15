@@ -21,6 +21,8 @@ try {
   await page.locator('[data-report-ready="true"]').waitFor({timeout:120000});
   const manifest=JSON.parse(await page.locator('#report-manifest').textContent());
   if(snapshot && manifest.snapshotId!==snapshot) throw Error('Mixed snapshot');
+  if(receipt?.analysisHash && manifest.analysisHash!==receipt.analysisHash) throw Error('Mixed analysis');
+  if(receipt?.analysisHash && await page.locator('[data-analysis-point]').count()<4) throw Error('Missing Codex commentary');
   const actualSections=await page.locator('[data-report-section]').evaluateAll(xs=>xs.map(x=>x.getAttribute('data-report-section')));
   const panelCount=await page.locator('[data-report-panel]').count();
   if(JSON.stringify(actualSections)!==JSON.stringify(manifest.sectionKeys) || panelCount!==manifest.panels) throw Error('Incomplete report scope');

@@ -51,7 +51,7 @@ export function checkClaims(
     'oidc_check_42',
   );
   assert(
-    c.event_name === 'schedule' || c.event_name === 'workflow_dispatch',
+    c.event_name === 'schedule' || c.event_name === 'workflow_dispatch' || c.event_name === 'push',
     'oidc_check_46',
   );
   assert(c.runner_environment === 'github-hosted', 'oidc_check_47');

@@ -1,7 +1,7 @@
 import { pages, type PanelDef } from './catalog.ts';
 import { getDataset, numeric, type Bundle, type Dataset } from './data.ts';
 import { columnUnit, dependencyIds, projectedRows } from './quality.ts';
-export const reportVersion = '2026-09-v2';
+export const reportVersion = '2026-09-v3';
 export const overviewPanels: PanelDef[] = [
   { id: 'cex_spot_daily', title: '现货交易活跃度' },
   { id: 'cex_futures_daily', title: '合约交易活跃度' },
@@ -145,6 +145,9 @@ export function reportManifest(bundle: Bundle) {
     version: reportVersion,
     snapshotId: bundle.snapshotId,
     generatedAt: bundle.generatedAt,
+    analysisHash: bundle.edition?.analysisHash || null,
+    reportDate: bundle.edition?.reportDate || null,
+    cutoffAt: bundle.edition?.cutoffAt || null,
     routes: 13,
     sections: sections.length,
     panels: sections.reduce((n, s) => n + s.panels.length, 0),

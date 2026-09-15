@@ -1,6 +1,8 @@
 'use client';
 /* oxlint-disable next/no-html-link-for-pages */
 import { useEffect, useState } from 'react';
+import { AnalysisSummary } from '@/components/analysis-summary';
+import { EditionStamp } from '@/components/edition-stamp';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid } from 'recharts';
 import {
   type Bundle,
@@ -162,7 +164,7 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
     >
       <div className="report-toolbar">
         <a href="/">← 数据中心</a>
-        <a href="/api/reports/latest?download=1">下载最新 PDF</a>
+        <a href={'/api/reports/latest?download=1&snapshot=' + bundle.snapshotId}>下载本版 PDF</a>
         <button onClick={() => window.print()}>打印 / 保存此报告</button>
         <a href="/sources">逐项数据核验</a>
       </div>
@@ -173,6 +175,7 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
         <div className="report-cover-date">
           数据批次 {sourceTime(bundle.generatedAt)}
         </div>
+        <EditionStamp bundle={bundle} report />
         <div className="report-cover-grid">
           <div>
             <strong>{manifest.routes}</strong>
@@ -205,11 +208,11 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
           个板块目录集中列于附录。关键明细表的全部已采集行和字段分组进入附录；本报告不穷举历史时序的每个筛选组合。
         </p>
         <p className="report-note">
-          AI
-          市场解读：待接入。当前仅呈现数据与计算结果，不自动生成未经核验的结论。原站聚合数据的公开使用条件仍待逐项确认。
+          AI 解读由 Codex 基于本报告数据生成，具体证据和限制随解读列示。原站聚合数据的公开使用条件仍待逐项确认。
         </p>
-        <p>{schedule.text}采集；任务可能排队，实际时间见附录。</p>
+        <p>{schedule.text}；实际采样时间见附录。</p>
       </section>
+      {bundle.analysis && <section className="report-analysis-page"><AnalysisSummary bundle={bundle} report /></section>}
       <section className="report-index">
         <h2>报告目录</h2>
         <div>
@@ -429,7 +432,7 @@ export function ReportDocument({ bundle }: { bundle: Bundle }) {
             })}
             <tr>
               <td>AI 市场解读</td>
-              <td>模型与费用方案待确认</td>
+              <td>{bundle.analysis ? "本报告已包含同快照 Codex 解读" : "等待本日报 Codex 解读"}</td>
             </tr>
             {getDataset(bundle, 'tradfi_labels').rows.map((r) => (
               <tr key={String(r.entity)}>

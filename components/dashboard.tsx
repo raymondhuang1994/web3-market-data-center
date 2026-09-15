@@ -3,6 +3,10 @@
 // vinext production Link prefetch fails in this release; native links preserve full route navigation.
 import { useEffect, useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { AnalysisSummary } from '@/components/analysis-summary';
+import { EditionStamp } from '@/components/edition-stamp';
+import type { Sector } from '@/lib/analysis';
+import { schedule } from '@/lib/quality';
 import {
   Activity,
   ArrowUpRight,
@@ -16,7 +20,6 @@ import {
   LineChart as LineIcon,
   RefreshCw,
   Search,
-  Sparkles,
   Table2,
   TrendingUp,
   Wallet,
@@ -637,7 +640,7 @@ export function Panel({
             {sourcePolicy(dataset).useStatus}
           </p>
           <p>
-            计划采集：每日北京时间 09:17、13:47。
+            {schedule.text}。
             <a href={`/sources#${dependencyIds(dataset.id)[0]}`}>
               查看逐项核验 ↗
             </a>
@@ -859,7 +862,7 @@ export default function Dashboard() {
             <span className="soft-button date-label">
               <CalendarDays size={14} />
               {bundle
-                ? new Date(bundle.generatedAt).toLocaleDateString('sv-SE', {
+                ? bundle.edition?.reportDate || new Date(bundle.generatedAt).toLocaleDateString('sv-SE', {
                     timeZone: 'Asia/Shanghai',
                   })
                 : '加载中'}
@@ -887,24 +890,9 @@ export default function Dashboard() {
             {error}
           </div>
         )}
-        <ReportActions />
-        <div className="summary-strip">
-          <div className="summary-icon">
-            <Sparkles size={20} />
-          </div>
-          <div>
-            <h2>
-              AI 市场解读 <span className="summary-status">待接入</span>
-            </h2>
-            <p>
-              保留每日解读栏目。数据来源和生成方案确认后，将基于可核验指标生成摘要。
-            </p>
-          </div>
-          <a className="soft-button" href="/sources">
-            查看数据覆盖
-            <ChevronRight size={13} />
-          </a>
-        </div>
+        <ReportActions snapshotId={bundle?.snapshotId} />
+        {bundle && <EditionStamp bundle={bundle} />}
+        {bundle && <AnalysisSummary bundle={bundle} sector={(page?.group === 'hl' ? 'hyperliquid' : page?.group) as Sector | undefined} />}
         {!bundle ? (
           <div className="kpi-grid">
             {[1, 2, 3, 4].map((i) => (

@@ -5,6 +5,8 @@ import { db } from '@/lib/db';
 import { sha256, verifyIdentity, ingestUrl } from '@/lib/oidc';
 import { keepLastGood, validateBundle } from '@/lib/snapshot';
 import type { Bundle } from '@/lib/data';
+import { editionTimes, enforceCutoff, hongKongDate } from '@/lib/edition';
+import { hongKongCalendar } from '@/lib/calendar';
 export async function POST(request: Request) {
   if (!request.headers.get('content-type')?.startsWith('application/json'))
     return Response.json({ error: 'JSON required' }, { status: 415 });
@@ -61,6 +63,8 @@ export async function POST(request: Request) {
       JSON.parse(new TextDecoder().decode(bytes)),
       bootstrap as unknown as Bundle,
     );
+    if (candidate.edition?.reportDate !== hongKongDate()) throw Error('Only today can be prepared');
+    candidate.edition = { ...editionTimes(candidate.edition.reportDate), calendar: hongKongCalendar(candidate.edition.reportDate) };
   } catch {
     return Response.json(
       { error: 'Invalid dataset contract' },
@@ -71,8 +75,9 @@ export async function POST(request: Request) {
     const database = db();
     const previous = await database
       .prepare(
-        'SELECT d.payload, s.generated_at, s.id FROM current_snapshot c JOIN snapshots s ON c.snapshot_id=s.id JOIN datasets d ON d.snapshot_id=s.id WHERE c.id=1',
+        'SELECT d.payload,s.generated_at,s.id FROM snapshots s JOIN datasets d ON d.snapshot_id=s.id WHERE s.id=(SELECT id FROM snapshots WHERE id IN (SELECT snapshot_id FROM current_snapshot UNION SELECT snapshot_id FROM daily_editions WHERE report_date=?) ORDER BY generated_at DESC LIMIT 1)',
       )
+      .bind(candidate.edition!.reportDate)
       .all<{ payload: string; generated_at: string; id: string }>();
     const replay = await database
       .prepare('SELECT payload_hash,snapshot_id FROM ingest_tokens WHERE jti=?')
@@ -110,15 +115,17 @@ export async function POST(request: Request) {
     )
       return Response.json({ error: 'Older batch rejected' }, { status: 409 });
     const bundle = keepLastGood(
-      candidate,
+      enforceCutoff(candidate, candidate.edition!.cutoffAt),
+      enforceCutoff(
       previous.results.length
         ? {
             schemaVersion: 1,
             generatedAt: previous.results[0].generated_at,
             datasets: previous.results.map((r) => JSON.parse(r.payload)),
           }
-        : (bootstrap as unknown as Bundle),
+        : (bootstrap as unknown as Bundle), candidate.edition!.cutoffAt),
     );
+    if (!bundle.datasets.some((d) => d.rows.length)) return Response.json({ error: 'No eligible pre-cutoff data' }, { status: 422 });
     if (new TextEncoder().encode(JSON.stringify(bundle)).length > 8000000)
       return Response.json(
         { error: 'Merged snapshot too large' },
@@ -134,12 +141,11 @@ export async function POST(request: Request) {
         .bind(claims.jti, hash, id, received),
       database
         .prepare(
-          "INSERT INTO snapshots(id,generated_at,received_at,run_id,payload_hash) VALUES(?,(SELECT ? WHERE COALESCE((SELECT snapshot_id FROM current_snapshot WHERE id=1),'')=?),?,?,?)",
+          'INSERT INTO snapshots(id,generated_at,received_at,run_id,payload_hash) VALUES(?,?,?,?,?)',
         )
         .bind(
           id,
           bundle.generatedAt,
-          previous.results[0]?.id || '',
           received,
           claims.run_id,
           hash,
@@ -166,9 +172,9 @@ export async function POST(request: Request) {
     statements.push(
       database
         .prepare(
-          'INSERT INTO current_snapshot(id,snapshot_id,generated_at) VALUES(1,?,?) ON CONFLICT(id) DO UPDATE SET snapshot_id=excluded.snapshot_id,generated_at=excluded.generated_at',
+          'INSERT INTO daily_editions(snapshot_id,report_date,cutoff_at,deadline_at,calendar_json) VALUES(?,?,?,?,?)',
         )
-        .bind(id, bundle.generatedAt),
+        .bind(id, bundle.edition!.reportDate, bundle.edition!.cutoffAt, bundle.edition!.deadlineAt, JSON.stringify(bundle.edition!.calendar)),
     );
     await database.batch(statements);
     let archived = false;
@@ -191,10 +197,11 @@ export async function POST(request: Request) {
         ),
       ]);
     } catch {
-      /* Cleanup is best effort after the atomic publication succeeded. */
+      /* Cleanup is best effort. The current complete edition stays protected. */
     }
     return Response.json({
       accepted: true,
+      staged: true,
       archived,
       snapshotId: id,
       runId: claims.run_id,

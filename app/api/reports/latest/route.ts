@@ -1,18 +1,23 @@
 import { db } from '@/lib/db';
 import { reportStorage } from '@/lib/storage';
 export async function GET(request: Request) {
+  const requested = new URL(request.url).searchParams.get('snapshot');
+  if (requested && !/^[a-f0-9]{64}$/.test(requested)) return Response.json({ error: 'Invalid snapshot' }, { status: 400 });
   try {
-    const report = await db()
-      .prepare(
-        'SELECT snapshot_id,object_key,byte_count,data_generated_at,created_at,pdf_hash FROM reports ORDER BY data_generated_at DESC LIMIT 1',
-      )
-      .first<{
+    const query = requested ? db().prepare('SELECT r.snapshot_id,r.object_key,r.byte_count,r.data_generated_at,r.created_at,r.pdf_hash,e.report_date,e.cutoff_at,e.analysis_hash,e.published_at FROM reports r LEFT JOIN daily_editions e ON e.snapshot_id=r.snapshot_id WHERE r.snapshot_id=? AND (e.snapshot_id IS NULL OR e.published_at IS NOT NULL)').bind(requested) : db().prepare(
+        'SELECT r.snapshot_id,r.object_key,r.byte_count,r.data_generated_at,r.created_at,r.pdf_hash,e.report_date,e.cutoff_at,e.analysis_hash,e.published_at FROM current_snapshot c JOIN reports r ON r.snapshot_id=c.snapshot_id LEFT JOIN daily_editions e ON e.snapshot_id=c.snapshot_id WHERE c.id=1',
+      );
+    const report = await query.first<{
         snapshot_id: string;
         object_key: string;
         byte_count: number;
         data_generated_at: string;
         created_at: string;
         pdf_hash: string;
+        report_date: string | null;
+        cutoff_at: string | null;
+        analysis_hash: string | null;
+        published_at: string | null;
       }>();
     if (!report)
       return new Response(
@@ -32,7 +37,11 @@ export async function GET(request: Request) {
           dataGeneratedAt: report.data_generated_at,
           createdAt: report.created_at,
           bytes: report.byte_count,
-          href: '/api/reports/latest?download=1',
+          reportDate: report.report_date,
+          cutoffAt: report.cutoff_at,
+          analysisHash: report.analysis_hash,
+          publishedAt: report.published_at,
+          href: '/api/reports/latest?download=1&snapshot=' + report.snapshot_id,
         },
         { headers: { 'Cache-Control': 'no-store' } },
       );
@@ -45,7 +54,7 @@ export async function GET(request: Request) {
     return new Response(file.body, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="web3-market-report-${report.data_generated_at.slice(0, 10)}.pdf"`,
+        'Content-Disposition': `attachment; filename="web3-market-report-${report.report_date || report.data_generated_at.slice(0, 10)}.pdf"`,
         'Content-Length': String(file.size),
         'Cache-Control': 'no-cache',
         ETag: '"' + report.pdf_hash + '"',

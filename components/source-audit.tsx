@@ -1,6 +1,7 @@
 'use client';
 /* oxlint-disable next/no-html-link-for-pages */
 import { useState } from 'react';
+import { EditionStamp } from '@/components/edition-stamp';
 import type { Bundle } from '@/lib/data';
 import { getDataset } from '@/lib/data';
 import { pages } from '@/lib/catalog';
@@ -49,6 +50,7 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
   );
   return (
     <>
+      <EditionStamp bundle={bundle} />
       <div className="audit-intro">
         <p>
           <strong>采集计划：</strong>
@@ -242,7 +244,7 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
             <TableRow>
               <TableCell>AI 市场解读</TableCell>
               <TableCell>
-                模型连接及费用方案待确认；仅以通过口径核验的数据为依据。
+                Codex 订阅解读；数字由程序计算、引用绑定同一数据快照。无需新增付费模型 API。
               </TableCell>
             </TableRow>
             {sectors.map((r) => (

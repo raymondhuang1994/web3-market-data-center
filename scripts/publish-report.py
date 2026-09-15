@@ -7,8 +7,8 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 def main():
     receipt=json.loads((ROOT/'work/receipt.json').read_text())
     manifest=json.loads((ROOT/'work/web3-market-report.manifest.json').read_text())
-    if manifest['snapshotId']!=receipt['snapshotId'] or manifest['generatedAt']!=receipt['generatedAt']:raise RuntimeError('Report snapshot mismatch')
-    target='https://web3-market-center.raymondhuangj.chatgpt.site/api/admin/report?snapshot='+receipt['snapshotId']
+    if manifest['snapshotId']!=receipt['snapshotId'] or manifest['generatedAt']!=receipt['generatedAt'] or not receipt.get('analysisHash') or manifest.get('analysisHash')!=receipt['analysisHash']:raise RuntimeError('Report snapshot or analysis mismatch')
+    target='https://web3-market-center.raymondhuangj.chatgpt.site/api/admin/report?snapshot='+receipt['snapshotId']+'&analysis='+receipt['analysisHash']
     body=(ROOT/'work/web3-market-report.pdf').read_bytes()
     audience=target+'#sha256='+hashlib.sha256(body).hexdigest()
     parts=urllib.parse.urlsplit(os.environ['ACTIONS_ID_TOKEN_REQUEST_URL'])

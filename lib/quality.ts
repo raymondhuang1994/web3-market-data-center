@@ -1,9 +1,10 @@
 import type { Bundle, Dataset, Row } from './data';
+import { editionStatus } from './edition.ts';
 
 export const schedule = {
-  timezone: 'Asia/Shanghai',
-  times: ['09:17', '13:47'],
-  text: '每日 09:17、13:47（北京时间）',
+  timezone: 'Asia/Hong_Kong',
+  times: ['08:37', '08:52'],
+  text: '每日 09:00 截止，目标 10:00 前发布（香港时间，含周末及公众假期）',
 };
 export const withheldIds = [
   'dex_spot_market_share',
@@ -96,6 +97,10 @@ export function displayStatus(d: Dataset, now = Date.now()): Dataset['status'] {
 export function batchHealth(b: Bundle, now = Date.now()) {
   if (b.delivery === 'bootstrap')
     return { healthy: false, text: '服务暂时回退初始快照' };
+  if (b.edition) {
+    const text = editionStatus(b, now);
+    return { healthy: !text.includes('延迟'), text };
+  }
   if (now - Date.parse(b.generatedAt) > 26 * 3600000)
     return { healthy: false, text: '采集批次超过 26 小时未更新' };
   return { healthy: true, text: '最近批次已发布' };
