@@ -103,7 +103,7 @@ export function batchHealth(b: Bundle, now = Date.now()) {
   }
   if (now - Date.parse(b.generatedAt) > 26 * 3600000)
     return { healthy: false, text: '采集批次超过 26 小时未更新' };
-  return { healthy: true, text: '最近批次已发布' };
+  return { healthy: false, text: editionStatus(b, now) };
 }
 export function sourceTime(s?: string | null) {
   if (!s) return '未提供';

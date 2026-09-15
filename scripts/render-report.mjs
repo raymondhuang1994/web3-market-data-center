@@ -30,6 +30,7 @@ try {
   const chartCount=await page.locator('svg.recharts-surface').count();
   if(chartCount<10) throw Error('Charts did not render');
   if(errors.length) throw Error('Report rendering error: '+errors.join('; '));
+  if(args['--preview']==='true') await page.evaluate(()=>{const note=document.createElement('p');note.textContent='验证预览 · 尚未在线发布';note.style.cssText='font-size:18px;font-weight:700;color:#98651a;background:#fff3d9;padding:12px';document.querySelector('.report-cover')?.prepend(note)});
   await page.pdf({path:output,format:'A4',landscape:true,printBackground:true,preferCSSPageSize:true,displayHeaderFooter:true,tagged:true,outline:true,
     headerTemplate:'<span></span>',footerTemplate:`<div style="width:100%;padding:0 40px;font-size:8px;color:#64748b;font-family:Arial"><span>Web3 Market Data Center | ${manifest.generatedAt.slice(0,10)} | ${String(manifest.snapshotId).slice(0,12)}</span><span style="float:right"><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>`});
   const bytes=await fs.readFile(output);if(bytes.length<30000 || bytes.length>20*1024*1024)throw Error('Unexpected PDF size');

@@ -59,7 +59,7 @@ export function SourceAudit({ bundle }: { bundle: Bundle }) {
         </p>
         <p>
           <strong>最近发布：</strong>
-          {sourceTime(bundle.generatedAt)} · {health.text}
+          {sourceTime(bundle.edition?.publishedAt || bundle.generatedAt)} · {health.text}
           。技术接入、数据时效和口径可靠性分别判断。
         </p>
         <p>

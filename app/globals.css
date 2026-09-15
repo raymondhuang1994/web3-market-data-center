@@ -1015,3 +1015,15 @@ svg {
 .report-analysis .analysis-grid { display:block; }
 .report-analysis article { break-inside:avoid; margin:0 0 14px; }
 @media(max-width:760px) { .analysis-grid { grid-template-columns:1fr; } .analysis-summary { padding:16px; } }
+@media print {
+  .report-analysis-page { padding:0; }
+  .report-analysis .analysis-heading { break-after:avoid; }
+  .report-analysis .analysis-method { font-size:11px; line-height:1.6; margin:6px 0 10px; break-after:avoid; }
+  .report-analysis .analysis-grid { margin-top:10px; }
+  .report-analysis .analysis-grid article { padding:12px 15px; margin-bottom:12px; }
+  .report-analysis .analysis-grid h3 { font-size:15px; margin:4px 0 7px; }
+  .report-analysis .analysis-grid p { font-size:11px; line-height:1.65; margin:5px 0; }
+  .report-analysis .analysis-grid summary { font-size:11px; margin-top:7px; }
+  .report-analysis .analysis-evidence { padding-top:5px; margin-top:7px; }
+  .report-analysis .analysis-evidence a { font-size:11px; }
+}
