@@ -5,6 +5,7 @@ import {
   generateBigModelAnalysis,
   BigModelError,
   BIGMODEL_ENDPOINT,
+  retryAfterSeconds,
 } from '../lib/bigmodel.ts';
 import {
   analysisFacts,
@@ -73,6 +74,33 @@ void test('free BigModel request is server-bound, tool-free and receives only ca
   assert.equal(result.snapshotId, b.snapshotId);
   assert.equal(result.factsHash, await factsDigest(analysisFacts(b)));
   assert.equal(JSON.stringify(result).includes('test-secret'), false);
+});
+void test('documented provider limits distinguish temporary failures from account blocks', async () => {
+  for (const [code, category, retryable] of [
+    ['1305', 'platform_overloaded', true], [1302, 'account_rate_limited', true],
+    ['1113', 'account_balance_blocked', false], ['1308', 'quota_exhausted', false],
+    ['1314', 'subscription_inactive', false], ['unknown-secret', 'http_429', true],
+  ] as const) {
+    await assert.rejects(generateBigModelAnalysis(bundle(), 'test-secret', (async () =>
+      new Response(JSON.stringify({ error: { code, message: 'private-account test-secret' } }),
+        { status: 429, headers: { 'Retry-After': '120' } })) as typeof fetch, now),
+      (error: unknown) => {
+        assert.ok(error instanceof BigModelError);
+        assert.equal(error.code, 'bigmodel_' + category);
+        assert.equal(error.retryable, retryable);
+        assert.equal(error.retryAfterSeconds, retryable ? 120 : undefined);
+        assert.doesNotMatch(JSON.stringify(error), /private-account|test-secret|unknown-secret/);
+        return true;
+      });
+  }
+});
+void test('Retry-After uses valid delays without reducing long provider waits', () => {
+  assert.equal(retryAfterSeconds('120', now), 120);
+  assert.equal(retryAfterSeconds(new Date(now + 300000).toUTCString(), now), 300);
+  assert.equal(retryAfterSeconds('7200', now), 7200);
+  for (const invalid of ['-1', 'NaN', '1.5', 'invalid']) {
+    assert.equal(retryAfterSeconds(invalid, now), undefined);
+  }
 });
 void test('missing key and premature generation make no external call', async () => {
   const fetcher = (() => {

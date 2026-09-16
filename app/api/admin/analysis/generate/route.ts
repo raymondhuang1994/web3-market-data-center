@@ -73,8 +73,10 @@ export async function POST(request: Request) {
   } catch (error) {
     if (error instanceof BigModelError)
       return Response.json(
-        { error: error.code, previousEditionRetained: true },
-        { status: error.retryable ? 503 : 422 },
+        { error: error.code, retryable: error.retryable, retryAfterSeconds: error.retryAfterSeconds,
+          providerCode: error.providerCode, previousEditionRetained: true },
+        { status: error.retryable ? 503 : 422,
+          headers: error.retryAfterSeconds !== undefined ? { 'Retry-After': String(error.retryAfterSeconds) } : {} },
       );
     console.warn('Automatic analysis failed; previous edition retained');
     return Response.json(

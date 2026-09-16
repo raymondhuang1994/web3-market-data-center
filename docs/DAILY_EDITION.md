@@ -1,3 +1,5 @@
+> 2026-09-16 运行恢复更新：见 [AUTOMATION_GUARD.md](AUTOMATION_GUARD.md)，补充 09:00 前 Codex 启动保障、延迟任务处理及免费模型错误分类。
+
 > 当前新增合同与 Mac 执行方案见 [RELEASE_MAC.md](RELEASE_MAC.md)：保留原栏目，新增来源分层标注；替代下文旧采集规模及运行位置说明。
 
 # 每日 09:00 数据与 AI 解读
@@ -40,10 +42,10 @@ JSON：version=1、producer="BigModel"、model="glm-4.7-flash"、snapshotId、re
 
 ## 运行与恢复
 
-- 主流程由 GitHub Actions 和网站服务端运行，不依赖 Mac 开机或 Codex 在线。GitHub 排队、账号运行限制或来源延迟仍可能使日报迟到；10 点是目标，并非已验证的硬性 SLA。
+- 主流程由 GitHub Actions 排程、Mac 运行器执行和网站服务端共同运行；执行依赖 Mac 在线，新增启动保障也依赖 Codex 在线。GitHub 排队、账号运行限制或来源延迟仍可能使日报迟到；10 点是目标，并非已验证的硬性 SLA。
 - 手动 workflow_dispatch 默认 finalize；若没有当日草稿，安全复用截止前存量数据并暂存，再生成报告。
 - 创建或更新当天 `data/requests/YYYY-MM-DD.json`（仅 reportDate/requestedAt）可触发恢复：九点前采集，九点后完成整份日报。相同日期仅用同一请求文件，不新增无关内容。
-- 原 Codex heartbeat `web3-9-codex` 已调整为 09:10、09:35 运行核查。它不再写分析文件；正常成功和未变化保持安静，仅新故障、需要决定或目标未达时反馈。该额外核查依赖本机在线，云端生成不依赖它。
+- 原 Codex heartbeat `web3-9-codex` 已调整为 09:10、09:35 运行核查。它不再写分析文件；正常成功和未变化保持安静，仅新故障、需要决定或目标未达时反馈。该额外核查依赖本机在线，当前日报执行也依赖 Mac 运行器。
 - 成功条件：`/api/edition` 为 published，且 `/api/data` 与 `/api/reports/latest` 的 reportDate、snapshotId、analysisHash 一致，PDF 有效。触发成功和本地测试不能替代线上验收。
 - 源失败保留原日期，不补零；无法持续获取时保留栏目并反馈用户。十点后显示今日延迟。
 

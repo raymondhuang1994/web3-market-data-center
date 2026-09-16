@@ -1,3 +1,5 @@
+> 2026-09-16 运行恢复更新：见 [AUTOMATION_GUARD.md](AUTOMATION_GUARD.md)，补充 09:00 前 Codex 启动保障、延迟任务处理及免费模型错误分类。
+
 # 临时 Mac 运行器
 
 GitHub管理代码、定时与运行日志；Mac执行项目任务；现有云端网站保存数据、AI解读与PDF。自托管不消耗GitHub托管分钟额度，不新增付费服务。
