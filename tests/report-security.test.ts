@@ -39,15 +39,18 @@ void test('report audience is bound to route, snapshot and PDF digest', () => {
     run_number: '1',
     run_attempt: '1',
   };
-  checkClaims(claims, hash, now, base);
-  assert.throws(() =>
-    checkClaims(claims, hash, now, base.replace(analysis, 'e'.repeat(64))),
-  );
-  assert.throws(() => checkClaims(claims, hash, now, ingestUrl));
-  assert.throws(() => checkClaims(claims, 'c'.repeat(64), now, base));
-  assert.throws(() =>
-    checkClaims(claims, hash, now, base.replace(snapshot, 'c'.repeat(64))),
-  );
+  for (const repository_visibility of ['private', 'public']) {
+    claims.repository_visibility = repository_visibility;
+    checkClaims(claims, hash, now, base);
+    assert.throws(() =>
+      checkClaims(claims, hash, now, base.replace(analysis, 'e'.repeat(64))),
+    );
+    assert.throws(() => checkClaims(claims, hash, now, ingestUrl));
+    assert.throws(() => checkClaims(claims, 'c'.repeat(64), now, base));
+    assert.throws(() =>
+      checkClaims(claims, hash, now, base.replace(snapshot, 'c'.repeat(64))),
+    );
+  }
 });
 void test('real DEX source IDs are not confused with calculated shares', () => {
   assert.deepEqual(dependencyIds('dex_spot_market_share'), [

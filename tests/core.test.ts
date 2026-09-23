@@ -56,7 +56,7 @@ void test('claim allowlist rejects wrong repository, branch, event, audience, ex
     iat: String(seconds),
     workflow_ref: 'wrong',
     sub: 'wrong',
-    repository_visibility: 'public',
+    repository_visibility: 'internal',
   }))
     assert.throws(
       () => checkClaims({ ...claims, [key]: value }, hash, seconds),
@@ -69,6 +69,29 @@ void test('self-hosted authorization preserves repository and main-workflow rest
     assert.throws(()=>checkClaims({...claims,runner_environment:value},hash,seconds));
   for (const change of [{ref:'refs/heads/dev'},{repository_id:'1'},{workflow_ref:'other'},{aud:'other'}])
     assert.throws(()=>checkClaims({...claims,runner_environment:'self-hosted',...change},hash,seconds));
+});
+void test('public transition accepts only the same repository and main workflow on both runners', () => {
+  for (const repository_visibility of ['private', 'public']) {
+    for (const runner_environment of ['github-hosted', 'self-hosted']) {
+      const candidate = { ...claims, repository_visibility, runner_environment };
+      checkClaims(candidate, hash, seconds);
+      for (const change of [
+        { repository: 'fork/web3-market-data-center' },
+        { repository_id: '999' },
+        { repository_owner_id: '999' },
+        { repository_owner: 'fork' },
+        { ref: 'refs/pull/1/merge' },
+        { ref: 'refs/heads/dev' },
+        { ref_type: 'tag' },
+        { workflow_ref: 'other' },
+        { event_name: 'pull_request' },
+        { event_name: 'pull_request_target' },
+        { event_name: 'workflow_run' },
+      ]) assert.throws(() => checkClaims({ ...candidate, ...change }, hash, seconds));
+    }
+  }
+  for (const repository_visibility of [undefined, null, '', 'internal', true])
+    assert.throws(() => checkClaims({ ...claims, repository_visibility }, hash, seconds));
 });
 void test('RS256 signature validation rejects altered payload and attacker key headers', async () => {
   const key = await crypto.subtle.generateKey(

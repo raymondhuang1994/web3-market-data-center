@@ -40,7 +40,7 @@ export function checkClaims(
     'oidc_check_31',
   );
   assert(
-    c.repository_visibility === 'private' &&
+    (c.repository_visibility === 'private' || c.repository_visibility === 'public') &&
       c.ref === 'refs/heads/main' &&
       c.ref_type === 'branch',
     'oidc_check_37',
@@ -54,7 +54,7 @@ export function checkClaims(
     c.event_name === 'schedule' || c.event_name === 'workflow_dispatch' || c.event_name === 'push',
     'oidc_check_46',
   );
-  // Both execution environments are authorized for this private repository's
+  // Both execution environments are authorized for this exact repository's
   // exact main workflow. Labels route work; the signed claims above bind trust.
   assert(
     c.runner_environment === 'github-hosted' || c.runner_environment === 'self-hosted',

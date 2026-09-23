@@ -128,7 +128,7 @@ test('OIDC positive claims and independent negative claim mutations', () => {
   const mutations = [
     { aud: ingestUrl },
     { repository_id: '999' },
-    { repository_visibility: 'public' },
+    { repository_visibility: 'internal' },
     { ref: 'refs/heads/other' },
     { event_name: 'pull_request_target' },
     { event_name: 'pull_request' },

@@ -6,7 +6,9 @@ GitHub管理代码、定时与运行日志；Mac执行项目任务；现有云�
 
 运行器：GitHub官方actions/runner v2.337.0，macOS ARM64，SHA256 `5a2cd92908a93d7276a194e1de6008099f3e7946f3f8e14aa7a1a7b4a31fdec2`。独立目录 `~/.local/share/web3-data-center/runner`，用户LaunchAgent。该目录包含运行器凭据，禁止加入Git或公开日志；放在Documents以外以避免要求系统全盘访问权限。
 
-仓库变量 `WEB3_RUNNER=mac` 选择 `[self-hosted,macOS,ARM64,web3-data-center]`；其他值选择 `ubuntu-latest`。仅指定私有仓库main可以启动任务。checkout不持久化Git凭据。服务端继续校验签名、仓库/所有者ID、私有可见性、main、指定workflow和请求内容哈希；仅允许github-hosted/self-hosted两个执行环境。
+仓库变量 `WEB3_RUNNER=mac` 选择 `[self-hosted,macOS,ARM64,web3-data-center]`；其他值选择 `ubuntu-latest`。仅指定仓库main可以启动任务。checkout不持久化Git凭据。服务端继续校验签名、固定仓库/所有者ID、main、指定workflow、允许事件和请求内容哈希；仅允许github-hosted/self-hosted两个执行环境。
+
+2026-09-23：用户批准源码仓库公开。OIDC同时兼容该仓库的private/public身份，便于平滑切换；未知可见性、其他仓库/owner、非main、其他workflow和PR事件仍拒绝。当前工作流没有PR触发器。公开仓库的Actions日志也可公开查看，禁止记录密钥；不得在此Mac运行器上执行未经审阅的外部PR代码。将来修改工作流触发器或运行器权限需重新核查，服务端OIDC校验不等于Mac执行隔离。
 
 安装验收状态：专用运行器已注册并以用户服务运行，仓库变量已切换至Mac。窗口保活已安装；系统08:25自动唤醒仍待用户在终端完成管理员认证。没有将待认证步骤记作完成。
 
